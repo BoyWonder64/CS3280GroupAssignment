@@ -22,6 +22,7 @@ namespace GroupAssignment.Main
         public wndMain()
         {
             InitializeComponent();
+
         }
 
         private void MenuItem_Search_Click(object sender, RoutedEventArgs e)
