@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace GroupAssignment
+namespace GroupAssignment.Main
 {
     /// <summary>
     /// Interaction logic for wndMain.xaml
@@ -22,6 +22,16 @@ namespace GroupAssignment
         public wndMain()
         {
             InitializeComponent();
+        }
+
+        private void MenuItem_Search_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItem_Edit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
