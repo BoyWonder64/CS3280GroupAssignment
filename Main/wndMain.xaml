@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment.Main"
         mc:Ignorable="d"
-        Title="wndMain" Height="450" Width="800">
+        Title="Main Menu" Height="450" Width="800">
     <Grid Background="LightGray">
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
@@ -17,13 +17,30 @@
             <ColumnDefinition Width="300*"/>
         </Grid.ColumnDefinitions>
 
-        <Canvas>
-
+        <Canvas Grid.Column="0" >
             <Menu x:Name="mnu_Menu">
-                <MenuItem Header="Search" Height="31" Width="59" HorizontalAlignment="Center" Click="MenuItem_Search_Click"></MenuItem>
-                <MenuItem Header="Edit Items" Height="31" Width="72" HorizontalAlignment="Center" Click="MenuItem_Edit_Click"></MenuItem>
+                <MenuItem Header="Search" Height="31" Width="85" HorizontalAlignment="Center" Click="MenuItem_Search_Click"></MenuItem>
+                <MenuItem Header="Edit Items" Height="31" Width="96" HorizontalAlignment="Center" Click="MenuItem_Edit_Click"></MenuItem>
             </Menu>
 
+            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"></Label>
+            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <Label x:Name ="lbl_TotalCost"  Content="Total Cost:" Canvas.Left="10" Canvas.Top="180" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+
+            <Button x:Name="btn_EditInvoice" Content="Edit Invoice" Canvas.Left="21" Canvas.Top="234" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110"/>
+            <Button x:Name="btn_SaveInvoice" Content="Save Invoice" Canvas.Left="190" Canvas.Top="234" Height="38" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110"/>
+
+        </Canvas>
+
+        <Canvas Grid.Column="1" Grid.Row="0">
+            <Label x:Name ="lbl_cbItems" Content="Items" Canvas.Left="38" Canvas.Top="43" FontFamily="Cinzel Black" FontSize="20"/>
+            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" Canvas.Left="138" Canvas.Top="50" Height="30" />
+            <Label x:Name ="lbl_Cost" Content="Cost" Canvas.Left="38" Canvas.Top="109" FontFamily="Cinzel Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
+        </Canvas>
+
+        <Canvas Grid.Column="1" Grid.Row="1">
+            <Button x:Name="btn_AddItem" Content="Add Item" Canvas.Left="10" Canvas.Top="28" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110"/>
+            <Button x:Name="btn_RemoveItem" Content="Remove Invoice" Canvas.Left="267" Canvas.Top="28" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110"/>
         </Canvas>
     </Grid>
 </Window>
