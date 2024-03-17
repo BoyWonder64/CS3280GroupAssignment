@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GroupAssignment
+namespace GroupAssignment.Main
 {
-    internal class clsMainSQL
+    internal class clsMainLogic
     {
     }
 }
