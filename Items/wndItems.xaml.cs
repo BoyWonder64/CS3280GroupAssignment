@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -45,12 +46,15 @@ namespace GroupAssignment
         /// </summary>
 
         /// <summary>
-        /// Placeholder to help determine if the Items have been changed. If it has 
+        /// Placeholder to help determine if the Items have been changed.
+        /// Set to true when an item has been/edited/deleted.
+        /// Used by main window to know if it needs refreshing items list
         /// </summary>
         private bool HasItemsBeenChanged = false;
-        //bool HasItemsBeenChanged  //Set to true when an item has been/edited/deleted. Used by main window to know if it needs refreshing items list
-        //bool HasItemsBeenChanged  //Property
-
+       
+        /// <summary>
+        /// Main ItemScreen, setup all objects
+        /// </summary>
         public wndItems()
         {
             try
@@ -72,16 +76,17 @@ namespace GroupAssignment
             
         }
         
-        
+        /// <summary>
+        /// When the add item button is clicked,
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_AddItem_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                txt_ItemCodeTextBox.IsEnabled = true;
-                txt_ItemDescTextBox.IsEnabled = true;
-                txt_ItemCostTextBox.IsEnabled = true;
-
-
+                
                 HasItemsBeenChanged = true;
 
             }
@@ -92,12 +97,19 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// Wnen the edit button is pressed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_EditItem_Click(object sender, RoutedEventArgs e)
         {
             try
             {
 
-
+                txt_ItemCodeTextBox.IsEnabled = true;
+                txt_ItemDescTextBox.IsEnabled = true;
+                txt_ItemCostTextBox.IsEnabled = true;
 
                 HasItemsBeenChanged = true;
             }
@@ -108,6 +120,14 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// Will allow the user to delete an item from the database
+        ///
+        /// However, if an item is on an invoice it will not let them do so.
+        /// It will also display an error that states ITEM ON INVOICE
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_DeleteItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -122,6 +142,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_SaveItem_Click(object sender, RoutedEventArgs e)
         {
             int cost;
@@ -153,7 +178,8 @@ namespace GroupAssignment
                         Item.ItemCode = txt_ItemCodeTextBox.Text;
                         Item.ItemDesc = txt_ItemDescTextBox.Text;
                         Item.ItemCost = txt_ItemCostTextBox.Text;
-                      ItemLogic.AddItem();
+                        
+                        ItemLogic.AddItem(Item);
 
                     }
 
@@ -190,6 +216,9 @@ namespace GroupAssignment
             return true;
         }
 
+        /// <summary>
+        /// This resets the labels to the proper error codes and then hides them
+        /// </summary>
         private void errorReseter()
         {
             lblErr_CodeTxtBox.Content = "Must be single letter A-Z";
@@ -199,6 +228,19 @@ namespace GroupAssignment
             lblErr_CodeTxtBox.Visibility = Visibility.Hidden;
             lblErr_DescTxtBox.Visibility = Visibility.Hidden;
             lblErr_CostTxtBox.Visibility = Visibility.Hidden;
+        }
+
+
+    
+        /// <summary>
+        /// Need to figure out how to display the selected cell to the proper
+        /// Field 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void datag_ItemSelected_Click(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }//End of Class

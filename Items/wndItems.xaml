@@ -20,27 +20,28 @@
             <Label Content="Code:" Canvas.Left="10" Canvas.Top="20" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Cinzel Black" FontSize="14"/>
             <Label Content="Cost:" Canvas.Left="13" Canvas.Top="162" RenderTransformOrigin="0.518,0.29" HorizontalAlignment="Center" VerticalAlignment="Top" Width="51" FontFamily="Cinzel Black" FontSize="14"/>
             <Label Content="Description:" Canvas.Left="10" Canvas.Top="90" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Center" VerticalAlignment="Top" Width="141" FontFamily="Cinzel Black" FontSize="14"/>
-           
- <TextBox x:Name="txt_ItemCodeTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="23" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White" IsEnabled="False" MaxLength="1"/>
+
+            <TextBox x:Name="txt_ItemCodeTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="23" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White" IsEnabled="False" MaxLength="1"/>
             <TextBox x:Name="txt_ItemDescTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="93" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White" IsEnabled="False"/>
             <TextBox x:Name="txt_ItemCostTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="163" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White" IsEnabled="False"/>
-           
+
             <Label x:Name="lblErr_CodeTxtBox" Content="Must be single letter A-Z" Height="29" Width="171" Canvas.Left="168" Foreground="#FFAB2929" Visibility="Hidden"/>
             <Label x:Name="lblErr_DescTxtBox" Content="Must Not be empty" Height="29" Width="171" Canvas.Left="168" Foreground="#FFAB2929" HorizontalAlignment="Center" Canvas.Top="64" VerticalAlignment="Top" Visibility="Hidden"/>
             <Label x:Name="lblErr_CostTxtBox" Content="Must be a number" Height="29" Width="171" Canvas.Left="168" Foreground="#FFAB2929" HorizontalAlignment="Center" Canvas.Top="134" VerticalAlignment="Top" Visibility="Hidden"/>
-           
+
         </Canvas>
 
         <Canvas Grid.Column="1" Grid.RowSpan="1">
-            <DataGrid x:Name="datag_ItemDataGrid" Height="391" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10"/>
+      
+            <DataGrid x:Name="datag_ItemDataGrid" Height="391" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10" CanUserResizeRows="False" SelectionChanged="datag_ItemSelected_Click" IsReadOnly="True" />
         </Canvas>
 
         <Canvas Grid.Column="0" Grid.Row="1">
             <GroupBox Header="Options" Height="175" Width="263" Canvas.Left="23" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <Canvas Margin="0,0,341,0">
-                    <Button x:Name ="btn_AddItem" Content="Add Item" Canvas.Left="20" Canvas.Top="19" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_AddItem_Click"/>
-                    <Button x:Name ="btn_EditItem" Content="Edit Item" Canvas.Left="20" Canvas.Top="81" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="86" Click="btn_EditItem_Click"/>
-                    <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="137" Canvas.Top="81" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
+                    <Button x:Name ="btn_AddItem" Content="Add Item" Canvas.Left="20" Canvas.Top="76" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_AddItem_Click"/>
+                    <Button x:Name ="btn_EditItem" Content="Edit Item" Canvas.Left="20" Canvas.Top="19" HorizontalAlignment="Center" VerticalAlignment="Top" Height="33" Width="86" Click="btn_EditItem_Click"/>
+                    <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="137" Canvas.Top="76" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
                     <Button x:Name ="btn_SaveItem" Content="Save Item" Canvas.Left="137" Canvas.Top="19" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="81" Click="btn_SaveItem_Click"/>
                 </Canvas>
             </GroupBox>
