@@ -29,12 +29,12 @@ namespace GroupAssignment.Items
         }
 
         /// <summary>
-        /// Performs the select distinct
+        /// Collects a string for searching the LineItems to see if an invoice exists
         /// </summary>
         /// <param name="sItemCode"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static string SelectDistinctInvoiceNumber(string sItemCode)
+        public static string FindInvoiceNumberForItem(string sItemCode)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace GroupAssignment.Items
             }
         }
         /// <summary>
-        /// Performs the update query for the Item
+        /// Collects a string for the update query for the Item
         /// </summary>
         /// <param name="sItemDesc"></param>
         /// <param name="sItemCode"></param>
@@ -100,7 +100,7 @@ namespace GroupAssignment.Items
         {
             try
             {
-                string sSQL = "Delete from ItemDesc Where ItemCode = " +sItemCode;
+                string sSQL = "Delete from ItemDesc Where ItemCode = " + sItemCode;
                 return sSQL;
             }
             catch (Exception ex)

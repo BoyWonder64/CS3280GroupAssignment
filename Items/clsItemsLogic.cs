@@ -103,7 +103,7 @@ namespace GroupAssignment.Items
         }
 
         //DeleteItem(clsItem clsItemtoDelete)
-        public void DeleteItem(string ItemToDelete)
+        public void DeleteItem(clsItem ItemToDelete)
         {
             //create db object from the clsDataAccess class
             clsDataAccess db = new clsDataAccess();
@@ -113,7 +113,7 @@ namespace GroupAssignment.Items
             int iRet = 0;
 
             //Store the SQL search string inside ItemSQL
-            string ItemSQL = clsItemsSQL.DeleteItem(ItemToDelete);
+            string ItemSQL = clsItemsSQL.DeleteItem(ItemToDelete.ItemCode);
 
             //Execute the SQL statement using the clsDataAccess Class
             ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
@@ -121,9 +121,19 @@ namespace GroupAssignment.Items
         }
         
         //IsItemOnInvoice(clsItem)
-        public void IsItemInInvoice(string Item)
+        public void IsItemOnInvoice(clsItem Item)
         {
+            //create db object from the clsDataAccess class
+            clsDataAccess db = new clsDataAccess();
+            //Use the DataSet to create a ds object
+            DataSet ds = new DataSet();
+            //Used as the sql counter
+            int iRet = 0;
 
+            string ItemSQL = clsItemsSQL.FindInvoiceNumberForItem(Item.ItemCode);
+
+            //Execute the SQL statement using the clsDataAccess Class
+            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
         }
     
     }
