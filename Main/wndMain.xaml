@@ -18,8 +18,8 @@
                 <MenuItem x:Name="mnuBtn_EditItem" Header="Edit Items" Height="31" Width="96" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"></MenuItem>
             </Menu>
 
-            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"></Label>
-            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date:" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"></Label>
+            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number:" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
             <Label x:Name ="lbl_TotalCost"  Content="Total Cost:" Canvas.Left="10" Canvas.Top="180" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
         </Canvas>
 

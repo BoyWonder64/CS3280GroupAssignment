@@ -32,6 +32,10 @@ namespace GroupAssignment.Main
         public wndMain()
         {
             InitializeComponent();
+            Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+            ItemsScreen = new wndItems();
+            SearchScreen = new wndSearch();
 
         }
 

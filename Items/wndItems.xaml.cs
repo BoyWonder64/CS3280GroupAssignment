@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GroupAssignment.Common;
+using GroupAssignment.Items;
 
 namespace GroupAssignment
 {
@@ -19,9 +22,38 @@ namespace GroupAssignment
     /// </summary>
     public partial class wndItems : Window
     {
+
+        /// <summary>
+        /// This will serve as the handle 
+        /// </summary>
+        clsHandleError handler;
+
+        /// <summary>
+        /// This will serve as the itemLogic link
+        /// </summary>
+        clsItemsLogic ItemLogic;
+
+        /// <summary>
+        /// The Item window will allow you to add and delete items
+        /// Display the items current, and display the code, desc, and cost
+        /// </summary>
         public wndItems()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+
+                ItemLogic = new clsItemsLogic();
+
+                datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+
+            }
+            catch (Exception ex) 
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+            
         }
         /// <summary>
         /// Placeholder to help determine if the Items have been changed. If it has 

@@ -26,7 +26,7 @@
         </Canvas>
 
         <Canvas Grid.Column="1">
-            <DataGrid Height="197" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10"/>
+            <DataGrid x:Name="datag_ItemDataGrid" Height="197" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10"/>
 
         </Canvas>
         <Canvas Grid.Column="1" Grid.Row="1">
