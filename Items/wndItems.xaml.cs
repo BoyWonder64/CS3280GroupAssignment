@@ -23,7 +23,7 @@ namespace GroupAssignment
         {
             InitializeComponent();
         }
-
+        //Help me determine if an item has been changed. 
         private bool HasItemsBeenChanged = true;
         //bool HasItemsBeenChanged  //Set to true when an item has been/edited/deleted. Used by main windowe to know if needs refresing items list
         //bool HasItemsBeenChanged  //Property

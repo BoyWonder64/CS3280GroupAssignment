@@ -20,6 +20,11 @@ namespace GroupAssignment.Items
         private List<clsItem> ItemList;
 
         /// <summary>
+        /// Will serve as an item to be added
+        /// </summary>
+        clsItem Item;
+
+        /// <summary>
         /// Gathers a full list of items
         /// </summary>
         /// <returns></returns>
@@ -62,7 +67,19 @@ namespace GroupAssignment.Items
         }
 
 
+        public void AddItem(clsItem sItem)
+        {
+            //create db object from the clsDataAccess class
+            clsDataAccess db = new clsDataAccess();
+            //Use the DataSet to create a ds object
+            DataSet ds = new DataSet();
+            //Used as the sql counter
+            int iRet = 0;
 
+            if
+
+            string ItemSQL = clsItemsSQL.SelectItem();
+        }
         //AddItem(clsItem)
         //EditItem(clsItem clsOldItem, clsItem clsNewItem)
         //DeleteItem(clsItem clsItemtoDelete)

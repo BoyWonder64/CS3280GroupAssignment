@@ -23,11 +23,11 @@ namespace GroupAssignment.Items
             }
         }
 
-        public static string SelectDistinctInvoiceNumber()
+        public static string SelectDistinctInvoiceNumber(string sItemCode)
         {
             try
             {
-                string sSQL = "SELECT distinct(InvoiceNum) from LineItems where ItemCode = 'A'";
+                string sSQL = "SELECT distinct(InvoiceNum) from LineItems where ItemCode = " + sItemCode;
                 return sSQL;
             }
             catch (Exception ex)
@@ -37,11 +37,11 @@ namespace GroupAssignment.Items
             }
         }
 
-        public static string UpdateItemDesc()
+        public static string UpdateItemDesc(string sItemDesc, string sItemCode, string sItemCost)
         {
             try
             {
-                string sSQL = "Update ItemDesc Set ItemDesc = 'abcdef', Cost = 123 where ItemCode = 'A'";
+                string sSQL = "Update ItemDesc Set ItemDesc = " + sItemDesc + ", Cost = " + sItemCost + " where ItemCode = " + sItemCode;
                 return sSQL;
             }
             catch (Exception ex)
@@ -52,11 +52,16 @@ namespace GroupAssignment.Items
         }
 
 
-        public static string InsertIntoItemDesc()
+        /// <summary>
+        /// Performs an insert into ItemDesc based 
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string InsertIntoItemDesc(string sItemCode, string sItemDesc, string sItemCost)
         {
             try
             {
-                string sSQL = "Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values('ABC', 'blah', 321)";
+                string sSQL = "Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values("+ sItemCode +","+ sItemDesc+ ","+ sItemCost+")";
                 return sSQL;
             }
             catch (Exception ex)
@@ -66,12 +71,17 @@ namespace GroupAssignment.Items
             }
         }
      
-
-        public static string DeleteItem()
+        /// <summary>
+        /// Performs a delete for the itemCode based on the descrption
+        /// </summary>
+        /// <param name="sItemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string DeleteItem(string sItemCode)
         {
             try
             {
-                string sSQL = "Delete from ItemDesc Where ItemCode = 'ABC'";
+                string sSQL = "Delete from ItemDesc Where ItemCode = " +sItemCode;
                 return sSQL;
             }
             catch (Exception ex)
