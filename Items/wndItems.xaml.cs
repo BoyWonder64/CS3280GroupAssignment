@@ -106,7 +106,6 @@ namespace GroupAssignment
         {
             try
             {
-
                 txt_ItemCodeTextBox.IsEnabled = true;
                 txt_ItemDescTextBox.IsEnabled = true;
                 txt_ItemCostTextBox.IsEnabled = true;
@@ -175,10 +174,13 @@ namespace GroupAssignment
                     flag = StringEntryChecker(txt_ItemCodeTextBox.Text);
                     if (flag == true)
                     {
-                        Item.ItemCode = txt_ItemCodeTextBox.Text;
+                        //Set the user entry to Uppercase to keep formatting consistent
+                        string upperCaseCode = txt_ItemCodeTextBox.Text.ToUpper();
+                        //Place the entries into the object
+                        Item.ItemCode = upperCaseCode;
                         Item.ItemDesc = txt_ItemDescTextBox.Text;
                         Item.ItemCost = txt_ItemCostTextBox.Text;
-                        
+                        //Perform the logic and add the item
                         ItemLogic.AddItem(Item);
 
                     }
@@ -193,6 +195,15 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// This checks the entry given from the user
+        /// and checks if it is a letter between A-Z or a-z
+        /// I got help for this from the following site
+        /// -https://www.codeproject.com/Questions/322818/How-to-Allow-only-Alphabets-in-text-box
+        /// </summary>
+        /// <param name="userEntry"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         private bool StringEntryChecker(string userEntry)
         {
             try
@@ -231,16 +242,32 @@ namespace GroupAssignment
         }
 
 
-    
+
         /// <summary>
-        /// Need to figure out how to display the selected cell to the proper
-        /// Field 
+        /// Depending on what is selected, the selected cells
+        /// display into the text boxes for the user to isolate
+        /// and review
+        /// This one took me a really LONG time to figure out.
+        /// I got help from  the following stackoverflow article near the bottom
+        /// -https://stackoverflow.com/questions/5121186/datagrid-get-selected-rows-column-values
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void datag_ItemSelected_Click(object sender, SelectionChangedEventArgs e)
         {
-            
+            try
+            {
+                clsItem Item = (clsItem)datag_ItemDataGrid.SelectedItem;
+                txt_ItemCodeTextBox.Text = Item.ItemCode;
+                txt_ItemDescTextBox.Text = Item.ItemDesc;
+                txt_ItemCostTextBox.Text = Item.ItemCost;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+         
         }
     }
 }//End of Class

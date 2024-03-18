@@ -32,8 +32,9 @@
         </Canvas>
 
         <Canvas Grid.Column="1" Grid.RowSpan="1">
-      
-            <DataGrid x:Name="datag_ItemDataGrid" Height="391" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10" CanUserResizeRows="False" SelectionChanged="datag_ItemSelected_Click" IsReadOnly="True" />
+
+            <DataGrid x:Name="datag_ItemDataGrid" Height="391" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10" CanUserResizeRows="False" SelectionChanged="datag_ItemSelected_Click" IsReadOnly="True" CanUserAddRows="True">
+            </DataGrid>
         </Canvas>
 
         <Canvas Grid.Column="0" Grid.Row="1">
