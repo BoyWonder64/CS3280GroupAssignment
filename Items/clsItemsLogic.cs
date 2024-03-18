@@ -14,6 +14,9 @@ namespace GroupAssignment.Items
     /// </summary>
     public class clsItemsLogic
     {
+        /// <summary>
+        ///Will hold the full item list to display to the user
+        /// </summary>
         private List<clsItem> ItemList;
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace GroupAssignment.Items
                     clsItem Item = new clsItem();
                     Item.ItemCode = ds.Tables[0].Rows[i][0].ToString();
                     Item.ItemDesc = ds.Tables[0].Rows[i][1].ToString();
-                    Item.ItemCost = ds.Tables[0].Rows[i][0].ToString();
+                    Item.ItemCost = ds.Tables[0].Rows[i][2].ToString();
                     ItemList.Add(Item);
                 }
             }
@@ -54,9 +57,11 @@ namespace GroupAssignment.Items
                                     + "." + MethodInfo.GetCurrentMethod().Name + " -> "
                                     + ex.Message);
             }
-            //Return the itme List
+            //Return the item List
             return ItemList;
         }
+
+
 
         //AddItem(clsItem)
         //EditItem(clsItem clsOldItem, clsItem clsNewItem)
