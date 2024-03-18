@@ -25,7 +25,7 @@ namespace GroupAssignment.Items
         clsItem Item;
 
 
-
+        ////////////////////////////////////////////////////////////////////////////// ALWAYS SYNC CODE /////////////////////////////////////////
 
         /// <summary>
         /// Gathers a full list of items
@@ -70,7 +70,7 @@ namespace GroupAssignment.Items
         }
 
         //AddItem(clsItem)
-        public void AddItem(clsItem Item)
+        public void AddItem(clsItem NewItem)
         {
             //create db object from the clsDataAccess class
             clsDataAccess db = new clsDataAccess();
@@ -80,23 +80,48 @@ namespace GroupAssignment.Items
             int iRet = 0;
 
 
-            string ItemSQL = clsItemsSQL.SelectItem();
+            string ItemSQL = clsItemsSQL.AddItem(NewItem.ItemCode, NewItem.ItemDesc, NewItem.ItemCost);
+
+            //Execute the query
+            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
+
+
         }
 
         //EditItem(clsItem clsOldItem, clsItem clsNewItem)
         public void EditItem(clsItem oldItem, clsItem newItem)
         {
-
+            //create db object from the clsDataAccess class
+            clsDataAccess db = new clsDataAccess();
+            //Use the DataSet to create a ds object
+            DataSet ds = new DataSet();
+            //Used as the sql counter
+            int iRet = 0;
+            //Store the SQL search string inside ItemSQL
+            string ItemSQL = clsItemsSQL.EditItem(oldItem.ItemCode, oldItem.ItemDesc, oldItem.ItemCost, newItem.ItemCode, newItem.ItemDesc, newItem.ItemDesc);
+            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
         }
 
         //DeleteItem(clsItem clsItemtoDelete)
-        public void DeleteItem(clsItem ItemToDelete)
+        public void DeleteItem(string ItemToDelete)
         {
+            //create db object from the clsDataAccess class
+            clsDataAccess db = new clsDataAccess();
+            //Use the DataSet to create a ds object
+            DataSet ds = new DataSet();
+            //Used as the sql counter
+            int iRet = 0;
+
+            //Store the SQL search string inside ItemSQL
+            string ItemSQL = clsItemsSQL.DeleteItem(ItemToDelete);
+
+            //Execute the SQL statement using the clsDataAccess Class
+            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
 
         }
         
         //IsItemOnInvoice(clsItem)
-        public void IsItemInInvoice(clsItem Item)
+        public void IsItemInInvoice(string Item)
         {
 
         }

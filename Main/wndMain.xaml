@@ -14,8 +14,8 @@
 
         <Canvas Grid.Column="0" Grid.Row="0">
             <Menu x:Name="mnu_Menu">
-                <MenuItem Header="Search" Height="31" Width="85" HorizontalAlignment="Center" Click="MenuItem_Search_Click"></MenuItem>
-                <MenuItem Header="Edit Items" Height="31" Width="96" HorizontalAlignment="Center" Click="MenuItem_Edit_Click"></MenuItem>
+                <MenuItem x:Name="mnuBtn_SearchItem" Header="Search" Height="31" Width="85" HorizontalAlignment="Center" Click="MenuOption_Search_Click"></MenuItem>
+                <MenuItem x:Name="mnuBtn_EditItem" Header="Edit Items" Height="31" Width="96" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"></MenuItem>
             </Menu>
 
             <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"></Label>

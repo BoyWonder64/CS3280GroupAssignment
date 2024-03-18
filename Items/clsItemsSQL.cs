@@ -56,11 +56,11 @@ namespace GroupAssignment.Items
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
 
-        public static string UpdateItems(string sItemDesc, string sItemCode, string sItemCost)
+        public static string EditItem(string sOldItemCode, string sOldItemDesc, string sOldItemCost, string sNewItemCode, string sNewItemDesc, string sNewItemCost)
         {
             try
             {
-                string sSQL = "Update ItemDesc Set ItemDesc = " + sItemDesc + ", Cost = " + sItemCost + " where ItemCode = " + sItemCode;
+                string sSQL = "Update ItemDesc Set "+ sOldItemDesc + " = " + sNewItemDesc + "," + sOldItemCost + " = " + sNewItemCost + " where " + sOldItemCode + " = " + sNewItemCode;
                 return sSQL;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace GroupAssignment.Items
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static string InsertItem(string sItemCode, string sItemDesc, string sItemCost)
+        public static string AddItem(string sItemCode, string sItemDesc, string sItemCost)
         {
             try
             {

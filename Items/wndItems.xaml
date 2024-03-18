@@ -17,10 +17,12 @@
         </Grid.RowDefinitions>
 
         <Canvas Grid.Column="0" Grid.RowSpan="1">
-            <Label Content="Code" Canvas.Left="10" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-            <Label Content="Cost" Canvas.Left="13" Canvas.Top="141" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40"/>
-            <Label Content="Description" Canvas.Left="10" Canvas.Top="76" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Left" VerticalAlignment="Top" Width="86"/>
-
+            <Label Content="Code:" Canvas.Left="10" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Cinzel Black" FontSize="14"/>
+            <Label Content="Cost:" Canvas.Left="13" Canvas.Top="122" RenderTransformOrigin="0.518,0.29" HorizontalAlignment="Left" VerticalAlignment="Center" Width="51" FontFamily="Cinzel Black" FontSize="14"/>
+            <Label Content="Description:" Canvas.Left="10" Canvas.Top="80" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Center" VerticalAlignment="Top" Width="141" FontFamily="Cinzel Black" FontSize="14"/>
+            <TextBlock x:Name="txt_ItemCodeTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="39" HorizontalAlignment="Left" VerticalAlignment="Top" Width="179" Height="26" Background="White"/>
+            <TextBlock x:Name="txt_ItemDescTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="81" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White"/>
+            <TextBlock x:Name="txt_ItemCostTextBox" Canvas.Left="160" TextWrapping="Wrap" Canvas.Top="123" HorizontalAlignment="Center" VerticalAlignment="Top" Width="179" Height="26" Background="White"/>
         </Canvas>
 
         <Canvas Grid.Column="1">
@@ -33,10 +35,10 @@
             <GroupBox Header="Options" Height="205" Width="686" Canvas.Left="-325" HorizontalAlignment="Center" VerticalAlignment="Top">
 
                 <Canvas>
-                    <Button Content="Add Item" Canvas.Left="20" Canvas.Top="40" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                    <Button Content="Edit Item" Canvas.Left="175" Canvas.Top="40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33" Width="86"/>
-                    <Button Content="Delete Item" Canvas.Left="337" Canvas.Top="40" HorizontalAlignment="Left" Height="33" VerticalAlignment="Center" Width="81"/>
-                    <Button Content="Save Item" Canvas.Left="569" Canvas.Top="40" HorizontalAlignment="Left" Height="33" VerticalAlignment="Center" Width="81"/>
+                    <Button x:Name ="btn_AddItem" Content="Add Item" Canvas.Left="20" Canvas.Top="19" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_AddItem_Click"/>
+                    <Button x:Name ="btn_EditItem" Content="Edit Item" Canvas.Left="276" Canvas.Top="19" HorizontalAlignment="Left" VerticalAlignment="Top" Height="33" Width="86" Click="btn_EditItem_Click"/>
+                    <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="417" Canvas.Top="19" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
+                    <Button x:Name ="btn_SaveItem" Content="Save Item" Canvas.Left="137" Canvas.Top="19" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="81" Click="btn_SaveItem_Click"/>
                 </Canvas>
 
             </GroupBox>

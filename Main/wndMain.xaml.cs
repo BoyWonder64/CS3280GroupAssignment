@@ -19,19 +19,44 @@ namespace GroupAssignment.Main
     /// </summary>
     public partial class wndMain : Window
     {
+        /// <summary>
+        /// Adding the ItemsScreen window
+        /// </summary>
+        wndItems ItemsScreen;
+
+        /// <summary>
+        /// Adding the SearchScreen window
+        /// </summary>
+        wndSearch SearchScreen;
+
         public wndMain()
         {
             InitializeComponent();
 
         }
 
-        private void MenuItem_Search_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// When selecting this menu option, it switches to the Search Screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuOption_Search_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Hide();
+            SearchScreen.ShowDialog();
+            this.Show();
         }
 
-        private void MenuItem_Edit_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// When selecting this menu option, it switches to the Edit Items Screen 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuOption_EditItems_Click(object sender, RoutedEventArgs e)
         {
+            this.Hide();
+            ItemsScreen.ShowDialog();
+            this.Show();
 
         }
     }

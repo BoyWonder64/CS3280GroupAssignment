@@ -41,5 +41,25 @@ namespace GroupAssignment
                 //Disregard
             }
         }
+
+        private void btn_AddItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_EditItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_DeleteItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_SaveItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }//End of Class
