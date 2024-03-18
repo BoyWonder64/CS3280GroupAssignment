@@ -9,7 +9,7 @@ namespace GroupAssignment.Items
 {
     class clsItemsSQL
     {
-        public static string SelectInvoice()
+        public static string SelectItem()
         {
             try
             {
