@@ -24,6 +24,9 @@ namespace GroupAssignment.Items
         /// </summary>
         clsItem Item;
 
+
+
+
         /// <summary>
         /// Gathers a full list of items
         /// </summary>
@@ -66,8 +69,8 @@ namespace GroupAssignment.Items
             return ItemList;
         }
 
-
-        public void AddItem(clsItem sItem)
+        //AddItem(clsItem)
+        public void AddItem(clsItem Item)
         {
             //create db object from the clsDataAccess class
             clsDataAccess db = new clsDataAccess();
@@ -76,13 +79,27 @@ namespace GroupAssignment.Items
             //Used as the sql counter
             int iRet = 0;
 
-            if
 
             string ItemSQL = clsItemsSQL.SelectItem();
         }
-        //AddItem(clsItem)
+
         //EditItem(clsItem clsOldItem, clsItem clsNewItem)
+        public void EditItem(clsItem oldItem, clsItem newItem)
+        {
+
+        }
+
         //DeleteItem(clsItem clsItemtoDelete)
+        public void DeleteItem(clsItem ItemToDelete)
+        {
+
+        }
+        
         //IsItemOnInvoice(clsItem)
+        public void IsItemInInvoice(clsItem Item)
+        {
+
+        }
+    
     }
 }

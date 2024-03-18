@@ -9,6 +9,11 @@ namespace GroupAssignment.Items
 {
     class clsItemsSQL
     {
+        /// <summary>
+        /// Addes the select itemcode, itemdesc and cost from the current items
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string SelectItem()
         {
             try
@@ -23,6 +28,12 @@ namespace GroupAssignment.Items
             }
         }
 
+        /// <summary>
+        /// Performs the select distinct
+        /// </summary>
+        /// <param name="sItemCode"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public static string SelectDistinctInvoiceNumber(string sItemCode)
         {
             try
@@ -36,8 +47,16 @@ namespace GroupAssignment.Items
                                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
+        /// <summary>
+        /// Performs the update query for the Item
+        /// </summary>
+        /// <param name="sItemDesc"></param>
+        /// <param name="sItemCode"></param>
+        /// <param name="sItemCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
 
-        public static string UpdateItemDesc(string sItemDesc, string sItemCode, string sItemCost)
+        public static string UpdateItems(string sItemDesc, string sItemCode, string sItemCost)
         {
             try
             {
@@ -53,11 +72,11 @@ namespace GroupAssignment.Items
 
 
         /// <summary>
-        /// Performs an insert into ItemDesc based 
+        /// Performs an insert into the ItemDesc
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static string InsertIntoItemDesc(string sItemCode, string sItemDesc, string sItemCost)
+        public static string InsertItem(string sItemCode, string sItemDesc, string sItemCost)
         {
             try
             {
@@ -72,7 +91,7 @@ namespace GroupAssignment.Items
         }
      
         /// <summary>
-        /// Performs a delete for the itemCode based on the descrption
+        /// Performs a delete for the itemCode based on the ItemCode
         /// </summary>
         /// <param name="sItemCode"></param>
         /// <returns></returns>

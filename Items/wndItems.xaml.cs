@@ -23,9 +23,23 @@ namespace GroupAssignment
         {
             InitializeComponent();
         }
-        //Help me determine if an item has been changed. 
+        /// <summary>
+        /// Placeholder to help determine if the Items have been changed. If it has 
+        /// </summary>
         private bool HasItemsBeenChanged = true;
-        //bool HasItemsBeenChanged  //Set to true when an item has been/edited/deleted. Used by main windowe to know if needs refresing items list
+        //bool HasItemsBeenChanged  //Set to true when an item has been/edited/deleted. Used by main window to know if it needs refreshing items list
         //bool HasItemsBeenChanged  //Property
+
+        public void ItemChangeChecker()
+        {
+            if (HasItemsBeenChanged == true)
+            {
+
+            }
+            else
+            {
+                //Disregard
+            }
+        }
     }
 }//End of Class
