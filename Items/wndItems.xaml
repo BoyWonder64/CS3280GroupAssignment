@@ -5,8 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GroupAssignment"
         mc:Ignorable="d"
-        Title="wndItems" Height="450" Width="800">
-    <Grid>
-        
+        Title="Items" Height="450" Width="800">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500*"/>
+            <ColumnDefinition Width="600*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Canvas Grid.Column="0" Grid.RowSpan="0">
+            <Label Content="Code" Canvas.Left="10" Canvas.Top="33" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Label Content="Cost" Canvas.Left="13" Canvas.Top="141" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40"/>
+            <Label Content="Description" Canvas.Left="10" Canvas.Top="76" RenderTransformOrigin="0.489,0.55" HorizontalAlignment="Left" VerticalAlignment="Top" Width="86"/>
+
+        </Canvas>
+
+        <Canvas Grid.Column="1">
+            <DataGrid Height="197" Width="416" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Top="10" Canvas.Left="10"/>
+
+        </Canvas>
+        <Canvas Grid.Column="1" Grid.Row="1">
+
+
+            <GroupBox Header="Options" Height="205" Width="686" Canvas.Left="-325" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+                <Canvas>
+                    <Button Content="Add Item" Canvas.Left="20" Canvas.Top="40" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                    <Button Content="Edit Item" Canvas.Left="175" Canvas.Top="40" HorizontalAlignment="Left" VerticalAlignment="Center" Height="33" Width="86"/>
+                    <Button Content="Delete Item" Canvas.Left="337" Canvas.Top="40" HorizontalAlignment="Left" Height="33" VerticalAlignment="Center" Width="81"/>
+                    <Button Content="Save Item" Canvas.Left="569" Canvas.Top="40" HorizontalAlignment="Left" Height="33" VerticalAlignment="Center" Width="81"/>
+                </Canvas>
+
+            </GroupBox>
+        </Canvas>
     </Grid>
 </Window>
