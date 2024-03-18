@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GroupAssignment.Common;
+using GroupAssignment.Items;
 
 namespace GroupAssignment.Main
 {
@@ -29,6 +31,16 @@ namespace GroupAssignment.Main
         /// </summary>
         wndSearch SearchScreen;
 
+        /// <summary>
+        /// Adding the ItemLogic class
+        /// </summary>
+        clsItemsLogic ItemLogic;
+
+        /// <summary>
+        /// Adding the Item class
+        /// </summary>
+        clsItem Item;
+
         public wndMain()
         {
             InitializeComponent();
@@ -36,6 +48,10 @@ namespace GroupAssignment.Main
 
             ItemsScreen = new wndItems();
             SearchScreen = new wndSearch();
+            ItemLogic = new clsItemsLogic();
+            Item = new clsItem();
+
+            cb_MenuItemList.ItemsSource = ItemLogic.GetAllItems(); //////// Displaying differently?
 
         }
 

@@ -31,7 +31,7 @@
 
         <Canvas Grid.Column="1" Grid.Row="0">
             <Label x:Name ="lbl_cbItems" Content="Items" Canvas.Left="38" Canvas.Top="43" FontFamily="Cinzel Black" FontSize="20"/>
-            <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" Canvas.Left="138" Canvas.Top="50" Height="30" />
+            <ComboBox x:Name="cb_MenuItemList"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" Canvas.Left="138" Canvas.Top="50" Height="30"  />
             <Label x:Name ="lbl_Cost" Content="Cost" Canvas.Left="38" Canvas.Top="109" FontFamily="Cinzel Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
         </Canvas>
 
