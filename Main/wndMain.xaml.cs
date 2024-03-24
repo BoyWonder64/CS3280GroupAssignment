@@ -54,7 +54,7 @@ namespace GroupAssignment.Main
             ItemLogic = new clsItemsLogic();
             Item = new clsItem();
 
-            cb_MenuItemList.ItemsSource = ItemLogic.GetAllItems(); //////// Displaying differently?
+            cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); //////// Displaying differently?
         }
 
         /// <summary>

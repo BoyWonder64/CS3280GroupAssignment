@@ -15,32 +15,33 @@
         </Grid.ColumnDefinitions>
 
         <Canvas Grid.Column="0" Grid.Row="0">
-            <Menu x:Name="mnu_Menu">
-                <MenuItem x:Name="mnuBtn_SearchItem" Header="Search" Height="31" Width="85" HorizontalAlignment="Center" Click="MenuOption_Search_Click"></MenuItem>
-                <MenuItem x:Name="mnuBtn_EditItem" Header="Edit Items" Height="31" Width="96" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"></MenuItem>
+            <Menu x:Name="mnu_Menu" Width="auto" Background="DarkGray" Height="19" FontSize="14">
+                <MenuItem x:Name="mnuBtn_SearchItem" Header="Search" Height="31" Width="85" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_Search_Click"/>
+                <MenuItem x:Name="mnuBtn_EditItem" Header="Edit Items" Height="31" Width="96" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"/>
             </Menu>
 
-            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date:" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"></Label>
-            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number:" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
-            <Label x:Name ="lbl_TotalCost"  Content="Total Cost:" Canvas.Left="10" Canvas.Top="180" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"></Label>
+            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date:" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"/>
+            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number:" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Label x:Name ="lbl_TotalCost"  Content="Total Cost:" Canvas.Left="10" Canvas.Top="180" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </Canvas>
 
         <Canvas Grid.Column="0" Grid.Row="1">
-            <Button x:Name="btn_EditInvoice" Content="Edit Invoice" Canvas.Left="24" Canvas.Top="285" Height="38" HorizontalAlignment="Left" VerticalAlignment="Center" Width="110"/>
-            <Button x:Name="btn_SaveInvoice" Content="Save Invoice" Canvas.Left="224" Canvas.Top="285" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110"/>
+            <Button x:Name="btnEditInvoice" Content="Edit Invoice" Canvas.Left="24" Canvas.Top="285" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+            <Button x:Name="btnSaveInvoice" Content="Save Invoice" Canvas.Left="224" Canvas.Top="285" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="btnCreateInvoice" Content="Create Invoice" Canvas.Left="118" Canvas.Top="339" Height="30" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        </Canvas>
-
-        <Canvas Grid.Column="1" Grid.Row="0">
-            <Label x:Name ="lbl_cbItems" Content="Items" Canvas.Left="38" Canvas.Top="43" FontFamily="Cinzel Black" FontSize="20"/>
-            <ComboBox x:Name="cb_MenuItemList"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="194" Canvas.Left="138" Canvas.Top="50" Height="30"  />
-            <Label x:Name ="lbl_Cost" Content="Cost" Canvas.Left="38" Canvas.Top="109" FontFamily="Cinzel Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
         </Canvas>
 
         <Canvas Grid.Column="1" Grid.Row="1">
-            <Button x:Name="btn_AddItem" Content="Add Item" Canvas.Left="22" Canvas.Top="193" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.509,0.132"/>
-            <Button x:Name="btn_RemoveItem" Content="Remove Invoice" Canvas.Left="254" Canvas.Top="193" Height="38" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.345,4.212"/>
+            <Button x:Name="btnAddItem" Content="Add Item" Canvas.Left="22" Canvas.Top="193" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.509,0.132"/>
+            <Button x:Name="btnRemoveItem" Content="Remove Invoice" Canvas.Left="254" Canvas.Top="193" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.345,4.212"/>
             <DataGrid Height="159" Width="390" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="251" Canvas.Left="5"/>
+        </Canvas>
+
+        <Canvas Grid.Column="1" Grid.Row="0">
+            <Label x:Name ="lblcbItems" Content="Items" Canvas.Left="38" Canvas.Top="43" FontFamily="Cinzel Black" FontSize="20"/>
+            <ComboBox x:Name="cbMenuItemList" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Canvas.Left="138" Canvas.Top="50" Height="30"  />
+            <Label x:Name ="lblCost" Content="Cost" Canvas.Left="38" Canvas.Top="109" FontFamily="Cinzel Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
         </Canvas>
     </Grid>
 </Window>
