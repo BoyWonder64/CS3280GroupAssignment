@@ -41,6 +41,9 @@ namespace GroupAssignment.Main
         /// </summary>
         clsItem Item;
 
+        /// <summary>
+        /// Main Window Constructor.
+        /// </summary>
         public wndMain()
         {
             InitializeComponent();
@@ -52,7 +55,6 @@ namespace GroupAssignment.Main
             Item = new clsItem();
 
             cb_MenuItemList.ItemsSource = ItemLogic.GetAllItems(); //////// Displaying differently?
-
         }
 
         /// <summary>

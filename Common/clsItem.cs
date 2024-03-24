@@ -37,6 +37,14 @@ namespace GroupAssignment.Common
         /// Item Cost getter and setter
         /// </summary>
         public string ItemCost { get {  return sItemCost; } set { sItemCost = value; } }
-     
+
+        /// <summary>
+        /// Override of ToString Method.
+        /// </summary>
+        /// <returns>String</returns>
+        public override string ToString()
+        {
+            return sItemDesc;
+        }
     }
 }
