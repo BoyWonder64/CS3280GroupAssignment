@@ -77,7 +77,8 @@ namespace GroupAssignment
         }
         
         /// <summary>
-        /// When the add item button is clicked,
+        /// When the add item button is clicked, we will set the HasItemsBeenChanged to true
+        /// so that we can notify the user and the other screens that changes have been made
         /// 
         /// </summary>
         /// <param name="sender"></param>
@@ -98,7 +99,8 @@ namespace GroupAssignment
         }
 
         /// <summary>
-        /// Wnen the edit button is pressed
+        /// Wnen the edit button is pressed. We will enable the screen
+        /// and then allow the user to manipulate the item to fig their needs 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -142,7 +144,7 @@ namespace GroupAssignment
         }
 
         /// <summary>
-        /// 
+        /// This 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -268,6 +270,21 @@ namespace GroupAssignment
                                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
          
+        }
+        /// <summary>
+        /// This will take in a value from the main window and compare the bool
+        /// to see if an item has been adjusted or not
+        /// </summary>
+        private bool hasItemChangedChecker(bool flag)
+        {
+            if (flag == HasItemsBeenChanged)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }//End of Class
