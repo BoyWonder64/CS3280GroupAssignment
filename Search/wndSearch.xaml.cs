@@ -29,10 +29,10 @@ namespace GroupAssignment
         /// </summary>
         clsMainLogic MainLogic;
 
-        /// <summary>
-        /// This will grab the main screen window
-        /// </summary>
-        wndMain MainScreen;
+        ///// <summary>
+        ///// This will grab the main screen window
+        ///// </summary>
+        //wndMain MainScreen;
 
         /// <summary>
         /// This will serve as the handle 
@@ -53,13 +53,10 @@ namespace GroupAssignment
         {
             InitializeComponent();
             MainLogic = new clsMainLogic();
-            MainScreen = new wndMain();
             handler = new clsHandleError();
             Invoice = new clsInvoice();
             ItemLogic = new clsItemsLogic();
-
             dgInvoice.ItemsSource = ItemLogic.GetAllItems();
-
         }
 
         /// <summary>
@@ -70,8 +67,8 @@ namespace GroupAssignment
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
             this.Hide();
-            MainScreen.ShowDialog();
-            this.Show();
+            //MainScreen.ShowDialog();
+            //this.Show();
         }
 
     }
