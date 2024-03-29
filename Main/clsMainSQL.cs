@@ -11,15 +11,18 @@ namespace GroupAssignment.Main
     {
 
         /// <summary>
-        /// Updates the invoices
+        /// Updates the total cost of the invoice.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="totalCost">Total cost</param>
+        /// <param name="invoiceNum">Invoice Number</param>
+        /// <returns>String</returns>
         /// <exception cref="Exception"></exception>
-        public static string UpdateInvoice()
+        public static string UpdateInvoice(string totalCost, string invoiceNum)
         {
             try
             {
-                string sSQL = "UPDATE Invoices SET TotalCost = 1200 WHERE InvoiceNum = 123";
+                string sSQL = "UPDATE Invoices SET TotalCost = " + totalCost + " " +
+                              "WHERE InvoiceNum = " + invoiceNum;
                 return sSQL;
             }
             catch (Exception ex) 
@@ -30,15 +33,19 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Updates the line items
+        /// Inserts Item into database.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="invoiceNum">Invoice Number</param>
+        /// <param name="lineItemNum">Line Item Number</param>
+        /// <param name="itemCode">Item Code</param>
+        /// <returns>String</returns>
         /// <exception cref="Exception"></exception>
-        public static string InsertLineItems()
+        public static string InsertLineItems(string invoiceNum, string lineItemNum, string itemCode)
         {
             try
             {
-                string sSQL = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) Values(123, 1, 'AA')";
+                string sSQL = "INSERT INTO LineItems(InvoiceNum, LineItemNum, ItemCode) " +
+                              "Values(" + invoiceNum + ", " + lineItemNum + ", '" + itemCode + "')";
                 return sSQL;
             }
             catch (Exception ex)
@@ -49,15 +56,18 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Inserts into invoices
+        /// Inserts into invoices the invoice date and total cost.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="invoiceDate">Invoice date</param>
+        /// <param name="totalCost">Total Cost</param>
+        /// <returns>String</returns>
         /// <exception cref="Exception"></exception>
-        public static string InsertInvoice()
+        public static string InsertInvoice(string invoiceDate, string totalCost)
         {
             try
             {
-                string sSQL = "INSERT INTO Invoices(InvoiceDate, TotalCost) Values(#4/13/2018#, 100)";
+                string sSQL = "INSERT INTO Invoices(InvoiceDate, TotalCost) " +
+                              "Values(#" + invoiceDate + "#, " + totalCost + ")";
                 return sSQL;
             }
             catch (Exception ex)
@@ -68,15 +78,18 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Selects the invoice number, date and cost
+        /// Selects the invoice number, invoice date, and total cost.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="invoiceNum">Invoice Number</param>
+        /// <returns>string</returns>
         /// <exception cref="Exception"></exception>
-        public static string SelectInvoiceNumDateCost()
+        public static string SelectInvoiceNumDateCost(string invoiceNum)
         {
             try
             {
-                string sSQL = "SELECT InvoiceNum, InvoiceDate, TotalCost FROM Invoices WHERE InvoiceNum = 123";
+                string sSQL = "SELECT InvoiceNum, InvoiceDate, TotalCost " +
+                              "FROM Invoices " +
+                              "WHERE InvoiceNum = " + invoiceNum;
                 return sSQL;
             }
             catch (Exception ex)
@@ -87,15 +100,17 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Selects the item code, item desc, and cost
+        /// Selects item code, item description, and cost from itemDesc.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         /// <exception cref="Exception"></exception>
         public static string SelectItemCodeItemDescCost()
         {
             try
             {
-                string sSQL = "SELECT ItemCode, ItemDesc, Cost from ItemDesc";
+                // FIXME: maybe wont work.
+                string sSQL = "SELECT ItemCode, ItemDesc, Cost " +
+                              "FROM ItemDesc";
                 return sSQL;
             }
             catch (Exception ex)
@@ -106,16 +121,20 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Performs an detailed search for line items
+        /// Selects line item code, item description, and item cost.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="invoiceNum">invoice number</param>
+        /// <returns>String</returns>
         /// <exception cref="Exception"></exception>
-        public static string SelectLineItem()
+        public static string SelectLineItem(string invoiceNum)
         {
             try
             {
                 string sSQL =
-                    "SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost FROM LineItems, ItemDesc Where LineItems.ItemCode = ItemDesc.ItemCode And LineItems.InvoiceNum = 5000";
+                    "SELECT LineItems.ItemCode, ItemDesc.ItemDesc, ItemDesc.Cost " +
+                    "FROM LineItems, ItemDesc " +
+                    "Where LineItems.ItemCode = ItemDesc.ItemCode " +
+                    "And LineItems.InvoiceNum = " + invoiceNum;
                 return sSQL;
             }
             catch (Exception ex)
@@ -126,15 +145,18 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
-        /// Performs a Delete for line items where invoice number is a set number
+        /// Deletes Line Item.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="invoiceNum">Invoice Number</param>
+        /// <returns>string</returns>
         /// <exception cref="Exception"></exception>
-        public static string DeleteLineItem()
+        public static string DeleteLineItem(string invoiceNum)
         {
             try
             {
-                string sSQL = "DELETE FROM LineItems WHERE InvoiceNum = 5000";
+                string sSQL = "DELETE " +
+                              "FROM LineItems " +
+                              "WHERE InvoiceNum = " + invoiceNum;
                 return sSQL;
             }
             catch (Exception ex)
