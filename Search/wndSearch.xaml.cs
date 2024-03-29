@@ -48,6 +48,8 @@ namespace GroupAssignment
         /// </summary>
         clsItemsLogic ItemLogic;
 
+        
+
         public wndSearch(clsInvoice currentInvoice)
         {
             InitializeComponent();

@@ -25,22 +25,22 @@ namespace GroupAssignment.Main
         /// <summary>
         /// Adding the ItemsScreen window
         /// </summary>
-        wndItems ItemsScreen;
+        private wndItems ItemsScreen;
 
         /// <summary>
         /// Adding the SearchScreen window
         /// </summary>
-        wndSearch SearchScreen;
+        private wndSearch SearchScreen;
 
         /// <summary>
         /// Adding the ItemLogic class
         /// </summary>
-        clsItemsLogic ItemLogic;
+        private clsItemsLogic ItemLogic;
 
         /// <summary>
         /// Adding the Item class
         /// </summary>
-        clsItem Item;
+        private clsItem Item;
 
         /// <summary>
         /// current invoice
@@ -50,7 +50,14 @@ namespace GroupAssignment.Main
         /// <summary>
         /// Displays the error message.
         /// </summary>
-        clsHandleError errorHandler = new();
+        private clsHandleError errorHandler = new();
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private bool HasItemsBeenChanged = false;
+        // CHECKS TO SEE IF ITEMS HAVE BEEN CHANGED
 
         /// <summary>
         /// Main Window Constructor.
@@ -59,14 +66,13 @@ namespace GroupAssignment.Main
         {
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-
             currentInvoice = new clsInvoice();
             ItemsScreen = new wndItems(currentInvoice);
             SearchScreen = new wndSearch(currentInvoice);
             ItemLogic = new clsItemsLogic();
             Item = new clsItem();
 
-            cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); //////// Displaying differently?
+            cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); 
         }
 
         /// <summary>
@@ -101,6 +107,10 @@ namespace GroupAssignment.Main
                 this.Hide();
                 ItemsScreen.ShowDialog();
                 this.Show();
+                if (HasItemsBeenChanged)
+                {
+                    cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); 
+                }
             }
             catch (Exception ex)
             {
