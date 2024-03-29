@@ -280,9 +280,9 @@ namespace GroupAssignment
         /// This will take in a value from the main window and compare the bool
         /// to see if an item has been adjusted or not
         /// </summary>
-        private bool hasItemChangedChecker(bool flag)
+        public bool hasItemChangedChecker()
         {
-            if (flag == HasItemsBeenChanged)
+            if (HasItemsBeenChanged)
             {
                 return true;
             }

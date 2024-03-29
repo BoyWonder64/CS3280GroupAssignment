@@ -54,12 +54,6 @@ namespace GroupAssignment.Main
 
 
         /// <summary>
-        /// 
-        /// </summary>
-        private bool HasItemsBeenChanged = false;
-        // CHECKS TO SEE IF ITEMS HAVE BEEN CHANGED
-
-        /// <summary>
         /// Main Window Constructor.
         /// </summary>
         public wndMain()
@@ -107,7 +101,7 @@ namespace GroupAssignment.Main
                 this.Hide();
                 ItemsScreen.ShowDialog();
                 this.Show();
-                if (HasItemsBeenChanged)
+                if (ItemsScreen.hasItemChangedChecker() == true)
                 {
                     cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); 
                 }
