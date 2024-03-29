@@ -7,210 +7,210 @@ using System.Threading.Tasks;
 
 namespace GroupAssignment.Search
 {
-    internal class clsSearchSQL
-{
-    /// <summary>
-    /// Select Everything From Invoices
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectAll()
+    public class clsSearchSQL
     {
-        try
+        /// <summary>
+        /// Select Everything From Invoices
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectAll()
         {
-            string sSQL = "SELECT * FROM Invoices";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Invoice
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceNum(string sInvoiceNumber)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Invoice
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceNum(string sInvoiceNumber)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber;
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber;
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Number and Date
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceNumDate(string sInvoiceDate, string sInvoiceNumber)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Number and Date
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceNumDate(string sInvoiceDate, string sInvoiceNumber)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber + "AND InvoiceDate = #" + sInvoiceDate + "#";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber + "AND InvoiceDate = #" + sInvoiceDate + "#";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Number, Date, and Cost
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceNumDateCost(string sInvoiceNumber, string sInvoiceDate, string sTotalCost)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Number, Date, and Cost
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceNumDateCost(string sInvoiceNumber, string sInvoiceDate, string sTotalCost)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber + "AND InvoiceDate = #" + sInvoiceDate + "# AND TotalCost = " + sTotalCost;
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE InvoiceNum = " + sInvoiceNumber + "AND InvoiceDate = #" + sInvoiceDate + "# AND TotalCost = " + sTotalCost;
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Cost
-    /// </summary>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceCost(string sTotalCost)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Cost
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceCost(string sTotalCost)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE TotalCost = " + sTotalCost;
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE TotalCost = " + sTotalCost;
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Cost and Date
-    /// </summary>
-    /// <param name="sTotalCost"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceCostDate(string sTotalCost, string sInvoiceDate)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Cost and Date
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceCostDate(string sTotalCost, string sInvoiceDate)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE TotalCost = " + sTotalCost + "AND InvoiceDate = #" + sInvoiceDate + "#";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE TotalCost = " + sTotalCost + "AND InvoiceDate = #" + sInvoiceDate + "#";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Everything From Selected Date
-    /// </summary>
-    /// <param name="sTotalCost"></param>
-    /// <param name="sInvoiceDate"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectInvoiceDate(string sInvoiceDate)
-    {
-        try
+        /// <summary>
+        /// Select Everything From Selected Date
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceDate(string sInvoiceDate)
         {
-            string sSQL = "SELECT * FROM Invoices WHERE InvoiceDate = #" + sInvoiceDate + "#";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE InvoiceDate = #" + sInvoiceDate + "#";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Distinct Number From Invoices
-    /// </summary>
-    /// <param name="sTotalCost"></param>
-    /// <param name="sInvoiceDate"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectDistinctNum()
-    {
-        try
+        /// <summary>
+        /// Select Distinct Number From Invoices
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectDistinctNum()
         {
-            string sSQL = "SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Distinct Date From Invoices
-    /// </summary>
-    /// <param name="sTotalCost"></param>
-    /// <param name="sInvoiceDate"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectDistinctDate()
-    {
-        try
+        /// <summary>
+        /// Select Distinct Date From Invoices
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectDistinctDate()
         {
-            string sSQL = "SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
 
-    /// <summary>
-    /// Select Distinct Cost From Invoices
-    /// </summary>
-    /// <param name="sTotalCost"></param>
-    /// <param name="sInvoiceDate"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public static string SelectDistinctCost()
-    {
-        try
+        /// <summary>
+        /// Select Distinct Cost From Invoices
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectDistinctCost()
         {
-            string sSQL = "SELECT DISTINCT(TotalCost) From Invoices order by TotalCost";
-            return sSQL;
+            try
+            {
+                string sSQL = "SELECT DISTINCT(TotalCost) From Invoices order by TotalCost";
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
-        catch (Exception ex)
-        {
-            throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
-                                MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        }
-    }
-    /*
-    SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum
-    SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate
-    SELECT DISTINCT(TotalCost) From Invoices order by TotalCost */
+        /*
+        SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum
+        SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate
+        SELECT DISTINCT(TotalCost) From Invoices order by TotalCost */
 
-}
+        }
 }

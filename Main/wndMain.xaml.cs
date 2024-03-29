@@ -42,7 +42,10 @@ namespace GroupAssignment.Main
         /// </summary>
         clsItem Item;
 
-
+        /// <summary>
+        /// current invoice
+        /// </summary>
+        private clsInvoice currentInvoice;
 
         /// <summary>
         /// Displays the error message.
@@ -57,8 +60,9 @@ namespace GroupAssignment.Main
             InitializeComponent();
             Application.Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
-            ItemsScreen = new wndItems();
-            SearchScreen = new wndSearch();
+            currentInvoice = new clsInvoice();
+            ItemsScreen = new wndItems(currentInvoice);
+            SearchScreen = new wndSearch(currentInvoice);
             ItemLogic = new clsItemsLogic();
             Item = new clsItem();
 

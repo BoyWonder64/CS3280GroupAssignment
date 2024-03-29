@@ -40,6 +40,8 @@ namespace GroupAssignment
         /// </summary>
         clsItem Item;
 
+        clsInvoice CurrentInvoice;
+
         /// <summary>
         /// The Item window will allow you to add and delete items
         /// Display the items current, and display the code, desc, and cost
@@ -51,11 +53,13 @@ namespace GroupAssignment
         /// Used by main window to know if it needs refreshing items list
         /// </summary>
         private bool HasItemsBeenChanged = false;
+
+        
        
         /// <summary>
         /// Main ItemScreen, setup all objects
         /// </summary>
-        public wndItems()
+        public wndItems(clsInvoice currentInvoice)
         {
             try
             {
@@ -66,6 +70,7 @@ namespace GroupAssignment
                 Item = new clsItem();
 
                 datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+                CurrentInvoice = currentInvoice;
 
             }
             catch (Exception ex) 
