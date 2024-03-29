@@ -25,8 +25,6 @@ namespace GroupAssignment.Items
         clsItem Item;
 
 
-        /////////////////////////////////////////////////////////// ALWAYS SYNC CODE ////////////////////////////////////////////////////
-
         /// <summary>
         /// Gathers a full list of items
         /// </summary>

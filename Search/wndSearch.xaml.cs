@@ -23,7 +23,6 @@ namespace GroupAssignment
     public partial class wndSearch : Window
     {
 
-
         /// <summary>
         /// THis will grab the mains logic
         /// </summary>
