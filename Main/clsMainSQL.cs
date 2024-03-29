@@ -56,6 +56,25 @@ namespace GroupAssignment.Main
         }
 
         /// <summary>
+        /// Gets the invoice number for a new invoice.
+        /// </summary>
+        /// <returns>String</returns>
+        /// <exception cref="Exception"></exception>
+        public static string getNewestInvoice()
+        {
+            try
+            {
+                return "SELECT MAX(InvoiceNum) FROM Invoices";
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + 
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Inserts into invoices the invoice date and total cost.
         /// </summary>
         /// <param name="invoiceDate">Invoice date</param>
@@ -165,6 +184,5 @@ namespace GroupAssignment.Main
                                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-
     }
 }
