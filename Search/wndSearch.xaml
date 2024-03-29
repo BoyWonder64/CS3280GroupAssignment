@@ -17,8 +17,9 @@
         <TextBox x:Name="txtNum" HorizontalAlignment="Left" Height="30" Margin="177,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="txtDate" HorizontalAlignment="Center" Height="30" Margin="0,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="txtCost" HorizontalAlignment="Left" Height="30" Margin="531,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Height="38" Margin="264,154,0,0" VerticalAlignment="Top" Width="103"/>
-        <Button x:Name="btnSelect" Content="SELECT" HorizontalAlignment="Left" Height="38" Margin="430,154,0,0" VerticalAlignment="Top" Width="103" Click="btnSelect_Click"/>
+        <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Height="38" Margin="216,154,0,0" VerticalAlignment="Top" Width="103"/>
+        <Button x:Name="btnSelect" Content="SELECT" HorizontalAlignment="Left" Height="38" Margin="481,154,0,0" VerticalAlignment="Top" Width="103" Click="btnSelect_Click"/>
+        <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Center" Height="38" Margin="0,154,0,0" VerticalAlignment="Top" Width="103" Click="btnCancle_Click"/>
 
     </Grid>
 </Window>

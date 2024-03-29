@@ -70,5 +70,14 @@ namespace GroupAssignment
             //this.Show();
         }
 
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void btnCancle_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
