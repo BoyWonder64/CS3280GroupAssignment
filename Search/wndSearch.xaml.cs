@@ -74,10 +74,5 @@ namespace GroupAssignment
         {
             this.Hide();
         }
-
-        private void btnCancle_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }
