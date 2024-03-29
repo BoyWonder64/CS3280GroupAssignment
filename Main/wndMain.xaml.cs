@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -42,6 +43,11 @@ namespace GroupAssignment.Main
         clsItem Item;
 
         /// <summary>
+        /// Displays the error message.
+        /// </summary>
+        clsHandleError errorHandler = new();
+
+        /// <summary>
         /// Main Window Constructor.
         /// </summary>
         public wndMain()
@@ -60,26 +66,41 @@ namespace GroupAssignment.Main
         /// <summary>
         /// When selecting this menu option, it switches to the Search Screen
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">search button</param>
+        /// <param name="e">click</param>
         private void MenuOption_Search_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            SearchScreen.ShowDialog();
-            this.Show();
+            try
+            {
+                this.Hide();
+                SearchScreen.ShowDialog();
+                this.Show();
+            }
+            catch (Exception ex)
+            {
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         /// <summary>
         /// When selecting this menu option, it switches to the Edit Items Screen 
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">items button</param>
+        /// <param name="e">click</param>
         private void MenuOption_EditItems_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            ItemsScreen.ShowDialog();
-            this.Show();
-
+            try
+            {
+                this.Hide();
+                ItemsScreen.ShowDialog();
+                this.Show();
+            }
+            catch (Exception ex)
+            {
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
     }
 }
