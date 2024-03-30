@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GroupAssignment.Items
 {
-    class clsItemsSQL
+    public class clsItemsSQL
     {
         /// <summary>
         /// Addes the select itemcode, itemdesc and cost from the current items

@@ -41,22 +41,24 @@ namespace GroupAssignment
         /// <summary>
         /// This adds the Invoice Class
         /// </summary>
-        clsInvoice Invoice;
+        clsInvoice CurrentInvoice;
 
         /// <summary>
         /// This will serve as the itemLogic link
         /// </summary>
         clsItemsLogic ItemLogic;
 
-        public wndSearch()
+        
+
+        public wndSearch(clsInvoice currentInvoice)
         {
             InitializeComponent();
 
             MainLogic = new clsMainLogic();
             handler = new clsHandleError();
-            Invoice = new clsInvoice();
             ItemLogic = new clsItemsLogic();
             dgInvoice.ItemsSource = ItemLogic.GetAllItems();
+            CurrentInvoice = currentInvoice;
         }
 
         /// <summary>

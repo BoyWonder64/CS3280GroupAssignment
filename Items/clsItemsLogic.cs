@@ -24,6 +24,11 @@ namespace GroupAssignment.Items
         /// </summary>
         clsItem Item;
 
+        /// <summary>
+        /// Will serve as connector to invoice class
+        /// </summary>
+        clsInvoice Invoice;
+
 
         /// <summary>
         /// Gathers a full list of items

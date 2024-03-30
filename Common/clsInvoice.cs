@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GroupAssignment.Common
 {
-    internal class clsInvoice
+    public class clsInvoice
     {
         /// <summary>
         /// Contains the invoice number
@@ -23,8 +23,6 @@ namespace GroupAssignment.Common
         /// </summary>
         private string sTotalCost;
         
-        //list<clsItems> /////////////////////////////////////////////////////////////////////////
-
         /// <summary>
         /// Getter and Setter for Invoice Number
         /// </summary>
