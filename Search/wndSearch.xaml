@@ -19,7 +19,7 @@
         <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Left" Height="38" Margin="350,154,0,0" VerticalAlignment="Top" Width="104" Click="btnCancel_Click"/>
         <ComboBox x:Name="dropNum" HorizontalAlignment="Left" Margin="175,71,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
         <ComboBox x:Name="dropDate" HorizontalAlignment="Left" Margin="375,72,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
-        <ComboBox x:Name="dropCost" HorizontalAlignment="Left" Margin="570,72,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
+        <ComboBox x:Name="dropCost" HorizontalAlignment="Left" Margin="570,72,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
