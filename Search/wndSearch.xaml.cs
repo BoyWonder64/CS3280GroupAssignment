@@ -51,6 +51,7 @@ namespace GroupAssignment
         public wndSearch()
         {
             InitializeComponent();
+
             MainLogic = new clsMainLogic();
             handler = new clsHandleError();
             Invoice = new clsInvoice();

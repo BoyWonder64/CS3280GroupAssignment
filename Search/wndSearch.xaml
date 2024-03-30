@@ -11,15 +11,15 @@
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
         </Grid.Background>
         <DataGrid x:Name="dgInvoice" HorizontalAlignment="Center" Height="127" Margin="0,246,0,0" VerticalAlignment="Top" Width="368" d:ItemsSource="{d:SampleData ItemCount=1}"/>
-        <Label x:Name="lblNum" Content="Invoice Number:" HorizontalAlignment="Left" Height="30" Margin="78,68,0,0" VerticalAlignment="Top" Width="99"/>
-        <Label x:Name="lblDate" Content="Invoice Date:" HorizontalAlignment="Left" Height="30" Margin="270,68,0,0" VerticalAlignment="Top" Width="80"/>
-        <Label x:Name="lblCost" Content="Invoice Cost:" HorizontalAlignment="Left" Height="30" Margin="455,69,0,0" VerticalAlignment="Top" Width="76"/>
-        <TextBox x:Name="txtNum" HorizontalAlignment="Left" Height="30" Margin="177,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="93" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="txtDate" HorizontalAlignment="Center" Height="30" Margin="0,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="104" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="txtCost" HorizontalAlignment="Left" Height="30" Margin="531,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label x:Name="lblNum" Content="Invoice Number:" HorizontalAlignment="Left" Height="30" Margin="76,68,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="lblDate" Content="Invoice Date:" HorizontalAlignment="Left" Height="30" Margin="295,69,0,0" VerticalAlignment="Top" Width="80"/>
+        <Label x:Name="lblCost" Content="Invoice Cost:" HorizontalAlignment="Left" Height="30" Margin="495,70,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Height="38" Margin="216,154,0,0" VerticalAlignment="Top" Width="103"/>
         <Button x:Name="btnSelect" Content="SELECT" HorizontalAlignment="Left" Height="38" Margin="481,154,0,0" VerticalAlignment="Top" Width="103" Click="btnSelect_Click"/>
         <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Left" Height="38" Margin="350,154,0,0" VerticalAlignment="Top" Width="104" Click="btnCancel_Click"/>
+        <ComboBox x:Name="dropNum" HorizontalAlignment="Left" Margin="175,71,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
+        <ComboBox x:Name="dropDate" HorizontalAlignment="Left" Margin="375,72,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
+        <ComboBox x:Name="dropCost" HorizontalAlignment="Left" Margin="570,72,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
 
     </Grid>
 </Window>
