@@ -4,6 +4,7 @@ using GroupAssignment.Main;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,11 +31,6 @@ namespace GroupAssignment
         /// </summary>
         clsMainLogic MainLogic;
 
-        ///// <summary>
-        ///// This will grab the main screen window
-        ///// </summary>
-        //wndMain MainScreen;
-
         /// <summary>
         /// This will serve as the handle 
         /// </summary>
@@ -50,7 +46,10 @@ namespace GroupAssignment
         /// </summary>
         clsItemsLogic ItemLogic;
 
-        
+        /// <summary>
+        /// Flag to see if selected an invoice.
+        /// </summary>
+        bool SelectedAnInvoice;
 
         public wndSearch(clsInvoice currentInvoice)
         {
@@ -70,13 +69,19 @@ namespace GroupAssignment
         /// <param name="e"></param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            this.Hide();
-            //MainScreen.ShowDialog();
-            //this.Show();
+            // Check if all drop boxes are selected.
+                // then...
+                CurrentInvoice.InvoiceNumber = dropNum.Text;
+                CurrentInvoice.TotalCost = dropCost.Text;
+                CurrentInvoice.InvoiceDate = dropDate.Text;
+                SelectedAnInvoice = true;
+                this.Hide();
+            // if not return.
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            SelectedAnInvoice = true;
             this.Hide();
         }
 
@@ -94,6 +99,23 @@ namespace GroupAssignment
         //HAS BEEN SELECTED PASS IN NULL FOR THE OTHERS UNTIL THEY ARE SELECTED THEN YOU GET THAT
         //FILTERING AFFECT.
 
+        /// <summary>
+        /// Public property for to see if there was an invoice selected.
+        /// </summary>
+        public bool IsSelectedAnInvoice
+        {
+            get
+            {
+                try
+                {
+                    return SelectedAnInvoice;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+        }
 
     }
 }
