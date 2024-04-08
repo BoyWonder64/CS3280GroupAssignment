@@ -22,6 +22,11 @@ namespace GroupAssignment.Common
         /// Contains the Total Cost
         /// </summary>
         private string sTotalCost;
+
+        /// <summary>
+        /// The list of the invoice items.
+        /// </summary>
+        private List<clsItem> lInvoiceItems;
         
         /// <summary>
         /// Getter and Setter for Invoice Number
@@ -48,6 +53,15 @@ namespace GroupAssignment.Common
         {
             get { return sTotalCost; }
             set { sTotalCost = value; }
+        }
+
+        /// <summary>
+        /// Getter and Setter for Total Cost
+        /// </summary>
+        public List<clsItem> InvoiceItems
+        {
+            get { return lInvoiceItems; }
+            set { lInvoiceItems = value; }
         }
     }
 }
