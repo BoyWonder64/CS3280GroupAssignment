@@ -26,7 +26,7 @@ namespace GroupAssignment.Common
         /// <summary>
         /// The list of the invoice items.
         /// </summary>
-        private List<clsItem> lInvoiceItems;
+        private List<clsItem> lInvoiceItems = new();
         
         /// <summary>
         /// Getter and Setter for Invoice Number
