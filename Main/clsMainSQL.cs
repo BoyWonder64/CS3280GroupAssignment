@@ -118,6 +118,7 @@ namespace GroupAssignment.Main
             }
         }
 
+        /////////////////////////////////////NOT USING//////////////////////////////////////////
         /// <summary>
         /// Selects item code, item description, and cost from itemDesc.
         /// </summary>
@@ -127,7 +128,6 @@ namespace GroupAssignment.Main
         {
             try
             {
-                // FIXME: maybe wont work.
                 string sSQL = "SELECT ItemCode, ItemDesc, Cost " +
                               "FROM ItemDesc";
                 return sSQL;

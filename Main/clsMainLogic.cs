@@ -19,25 +19,23 @@ namespace GroupAssignment.Main
         clsDataAccess dataAccess = new clsDataAccess();
 
         /// <summary>
-        /// List that will hold all of the items
+        /// Saves a newly created invoice to database. This works by inserting a new invoice, looping through the item list and adding each item to the 
+        /// line item, then returns the new invoice number.
         /// </summary>
-        //private List<clsItems> itemList;
-
-        /// <summary>
-        /// The current invoice.
-        /// </summary>
-        //clsInvoice currentInvoice;
-
-        /// <summary>
-        /// The list of items per invoice.
-        /// </summary>
-        private List<clsItem> ItemList;
-
-        public void SaveNewInvoice(clsInvoice currentInvoice)
+        /// <param name="currentInvoice">current invoice object</param>
+        /// <returns>invoice number</returns>
+        /// <exception cref="Exception"></exception>
+        public string SaveNewInvoice(clsInvoice currentInvoice)
         {
             try
             {
                 dataAccess.ExecuteNonQuery(clsMainSQL.InsertInvoice(currentInvoice.InvoiceDate, currentInvoice.TotalCost));
+                currentInvoice.InvoiceNumber = dataAccess.ExecuteScalarSQL(clsMainSQL.getNewestInvoice());
+                foreach (clsItem item in currentInvoice.InvoiceItems)
+                {
+                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, "1", item.ItemCode));
+                }
+                return currentInvoice.InvoiceNumber;
             }
             catch (Exception ex)
             {
@@ -45,24 +43,31 @@ namespace GroupAssignment.Main
             }
         }
 
-        //public void CreateNewInvoice()
-        //{
-        //    try
-        //    {
-        //        clsInvoice newInvoice = new clsInvoice();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-        //    }
-        //}
+        /// <summary>
+        /// Updates the currently edited invoice. first, deletes all the linked items in line items. second, loops through all new items in invoice and 
+        /// adds them to the line items. last, updates the total price.
+        /// </summary>
+        /// <param name="currentInvoice">current invoice object.</param>
+        /// <exception cref="Exception"></exception>
+        public void UpdateCurrentInvoice(clsInvoice currentInvoice)
+        {
+            try
+            {
+                dataAccess.ExecuteNonQuery(clsMainSQL.DeleteLineItem(currentInvoice.InvoiceNumber));
+                foreach (clsItem item in currentInvoice.InvoiceItems)
+                {
+                    // FIXME: need to figure out what "1" should be instead.
+                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, "1", item.ItemCode));
+                }
+                dataAccess.ExecuteNonQuery(clsMainSQL.UpdateInvoice(currentInvoice.TotalCost, currentInvoice.InvoiceNumber));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
-        //public void EditInvoice(invoiceNew, invoiceOld)
-        //{
-
-        //}
-
-        //GetInvoice(InvoiceNumber) returns clsInvoice - Get the invoice and items for the selected invoice and search window
+        /////////////////////////////////MIGHT NOT NEED THIS///////////////////////////////////////////////////
         /// <summary>
         /// Gets the invoice information using invoice number.
         /// </summary>

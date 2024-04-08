@@ -37,7 +37,7 @@
             <Label x:Name ="lbl_InvoiceNumber" Grid.Row="2" Content="Invoice Number:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <Label x:Name ="lbl_TotalCost" Grid.Row="3" Content="Total Cost:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-            <DatePicker x:Name="dp_InvoiceDate" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsTodayHighlighted="True" IsEnabled="False"/>
+            <DatePicker x:Name="dp_InvoiceDate" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsTodayHighlighted="True" IsEnabled="False" SelectedDateChanged="dp_InvoiceDate_SelectedDateChanged"/>
             <TextBox x:Name="txt_InvoiceNumber" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsEnabled="False"/>
             <TextBox x:Name="txt_TotalCost" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsEnabled="False"/>
 
@@ -71,7 +71,7 @@
                 <Button x:Name="btn_RemoveItem" Content="Remove Item" Grid.Column="1" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="btn_RemoveItem_Click" IsEnabled="False"/>
             </Grid>
 
-            <DataGrid x:Name="dg_InvoiceItemDisplay" Grid.Row="2" Grid.ColumnSpan="2" Height="auto" Width="390" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,79,0,0" Grid.RowSpan="2" />
+            <DataGrid x:Name="dg_InvoiceItemDisplay" Grid.Row="2" Grid.ColumnSpan="2" Height="auto" Width="390" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,79,0,0" Grid.RowSpan="2" IsEnabled="False"/>
             <Grid Grid.ColumnSpan="2" Grid.Row="4">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>

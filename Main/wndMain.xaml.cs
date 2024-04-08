@@ -103,11 +103,18 @@ namespace GroupAssignment.Main
                     //currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems(currentInvoice.InvoiceNumber);
                     //dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
 
+                    // FIXME: need to remove hard coded values.
+                    currentInvoice.InvoiceNumber = "5000";
+                    currentInvoice.TotalCost = "170";
+                    currentInvoice.InvoiceDate = "8/12/2022";
                     currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems("5000");
-                    dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
 
-                    btn_RemoveItem.IsEnabled = true;
-                    btn_AddItem.IsEnabled = true;
+                    dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
+                    txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;
+                    txt_TotalCost.Text = currentInvoice.TotalCost;
+                    dp_InvoiceDate.Text = currentInvoice.InvoiceDate;
+
+                    btn_EditInvoice.IsEnabled = true;
                     this.Show();
                 }
             }
@@ -155,6 +162,7 @@ namespace GroupAssignment.Main
                 currentInvoice = new clsInvoice();
                 cbMenuItemList.IsEnabled = true;
                 dp_InvoiceDate.IsEnabled = true;
+                dg_InvoiceItemDisplay.IsEnabled = true;
             }
             catch (Exception ex)
             {
@@ -172,11 +180,15 @@ namespace GroupAssignment.Main
         {
             try
             {
-                btn_AddItem.IsEnabled = true;
-                btn_RemoveItem.IsEnabled = true;
+                if (currentInvoice.InvoiceItems.Count > 0) 
+                { 
+                    btn_AddItem.IsEnabled = true;
+                    btn_RemoveItem.IsEnabled = true;
+                }
+
                 cbMenuItemList.IsEnabled = true;
                 dg_InvoiceItemDisplay.IsEnabled = true;
-                btn_SaveInvoice.IsEnabled = true;
+                dp_InvoiceDate.IsEnabled = true;
 
                 btn_EditInvoice.IsEnabled = false;
             }
@@ -196,6 +208,11 @@ namespace GroupAssignment.Main
         {
             try
             {
+                if (dp_InvoiceDate.SelectedDate != null) 
+                {
+                    btn_SaveInvoice.IsEnabled = true;
+                }
+
                 currentInvoice.InvoiceItems.Add((clsItem)cbMenuItemList.SelectedValue);
                 dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                 dg_InvoiceItemDisplay.Items.Refresh();
@@ -267,6 +284,7 @@ namespace GroupAssignment.Main
 
                 cbMenuItemList.IsEnabled = false;
                 dp_InvoiceDate.IsEnabled = false;
+                dg_InvoiceItemDisplay.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -284,25 +302,23 @@ namespace GroupAssignment.Main
         {
             try
             {
-                if (dp_InvoiceDate == null)
+                if (currentInvoice.InvoiceNumber != null)
                 {
-                    dp_InvoiceDate.Focus();
-                    return;
-                }
-                // if currentInvoice.invoiceNum != ""
                     //update invoice using main logic.
-
-                // else 
+                    MainLogic.UpdateCurrentInvoice(currentInvoice);
+                }
+                else
+                {
                     // Save invoice using mainlogic.
-                    // set new invoice number to currentinvoice.
-                    // display new invoice number
-                        // mainlogic query top invoice number
+                    txt_InvoiceNumber.Text = MainLogic.SaveNewInvoice(currentInvoice);
+                }
 
                 btn_AddItem.IsEnabled = false;
                 btn_RemoveItem.IsEnabled = false;
                 cbMenuItemList.IsEnabled = false;
                 dg_InvoiceItemDisplay.IsEnabled = false;
                 btn_SaveInvoice.IsEnabled = false;
+                dp_InvoiceDate.IsEnabled = false;
 
                 btn_EditInvoice.IsEnabled = true;
             }
@@ -328,6 +344,29 @@ namespace GroupAssignment.Main
                     txt_ItemCost.Text = selectedItem.ItemCost;
                     btn_AddItem.IsEnabled = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Checks to see if date has been selected.
+        /// </summary>
+        /// <param name="sender">date picker</param>
+        /// <param name="e">selected date</param>
+        private void dp_InvoiceDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                currentInvoice.InvoiceDate = dp_InvoiceDate.SelectedDate.Value.Date.ToShortDateString();
+                if (currentInvoice.InvoiceItems.Count == 0) 
+                {
+                    return;
+                }
+                btn_SaveInvoice.IsEnabled = true;
             }
             catch (Exception ex)
             {
