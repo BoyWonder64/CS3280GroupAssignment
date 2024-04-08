@@ -117,5 +117,30 @@ namespace GroupAssignment.Main
             }
             return itemList;
         }
+
+        /// <summary>
+        /// Returns a string of the updated cost of all the items in invoice.
+        /// </summary>
+        /// <param name="CurrentInvoice">the invoice to sum the total.</param>
+        /// <returns>string</returns>
+        /// <exception cref="Exception"></exception>
+        public string updateTotalCost(clsInvoice CurrentInvoice)
+        {
+            try
+            {
+                float iTotalCost = 0;
+                foreach (clsItem item in CurrentInvoice.InvoiceItems)
+                {
+                    Int32.TryParse( item.ItemCost, out int result);
+                    iTotalCost += (float)result;
+                }
+                CurrentInvoice.TotalCost = iTotalCost.ToString();
+                return $"${Math.Round(iTotalCost, 2).ToString()}";
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
     }
 }

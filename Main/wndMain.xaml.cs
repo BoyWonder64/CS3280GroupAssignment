@@ -52,10 +52,6 @@ namespace GroupAssignment.Main
         /// </summary>
         private clsInvoice currentInvoice;
 
-        /// <summary>
-        /// The current Items for the current invoice.
-        /// </summary>
-        private List<clsItem> CurrentItems;
 
         /// <summary>
         /// Displays the error message.
@@ -80,7 +76,7 @@ namespace GroupAssignment.Main
             cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); 
         }
 
-        #region ButtonClick
+        #region ButtonClickMethods
         /// <summary>
         /// When selecting this menu option, it switches to the Search Screen
         /// </summary>
@@ -104,10 +100,12 @@ namespace GroupAssignment.Main
                     //txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;
                     //txt_TotalCost.Text = currentInvoice.TotalCost;
 
-                    //CurrentItems = MainLogic.GetInvoiceItems(currentInvoice.InvoiceNumber);
-                    //dg_InvoiceItemDisplay.ItemsSource = CurrentItems;
-                    CurrentItems = MainLogic.GetInvoiceItems("5000");
-                    dg_InvoiceItemDisplay.ItemsSource = CurrentItems;
+                    //currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems(currentInvoice.InvoiceNumber);
+                    //dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
+
+                    currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems("5000");
+                    dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
+
                     btn_RemoveItem.IsEnabled = true;
                     btn_AddItem.IsEnabled = true;
                     this.Show();
@@ -144,13 +142,17 @@ namespace GroupAssignment.Main
             }
         }
 
+        /// <summary>
+        /// Creates new invoice.
+        /// </summary>
+        /// <param name="sender">create invoice button</param>
+        /// <param name="e">click</param>
         private void btn_CreateInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 txt_InvoiceNumber.Text = "TBD";
-                clsInvoice newInvoice = new clsInvoice();
-                CurrentItems = new List<clsItem>();
+                currentInvoice = new clsInvoice();
                 cbMenuItemList.IsEnabled = true;
                 dp_InvoiceDate.IsEnabled = true;
             }
@@ -161,10 +163,22 @@ namespace GroupAssignment.Main
             }
         }
 
+        /// <summary>
+        /// Allows user to edit pre-existing invoices.
+        /// </summary>
+        /// <param name="sender">edit invoice</param>
+        /// <param name="e">click</param>
         private void btn_EditInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                btn_AddItem.IsEnabled = true;
+                btn_RemoveItem.IsEnabled = true;
+                cbMenuItemList.IsEnabled = true;
+                dg_InvoiceItemDisplay.IsEnabled = true;
+                btn_SaveInvoice.IsEnabled = true;
+
+                btn_EditInvoice.IsEnabled = false;
             }
             catch (Exception ex)
             {
@@ -173,14 +187,19 @@ namespace GroupAssignment.Main
             }
         }
 
+        /// <summary>
+        /// Allows user to add new item to their invoice using the combo box selection.
+        /// </summary>
+        /// <param name="sender">add item button</param>
+        /// <param name="e">click</param>
         private void btn_AddItem_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                CurrentItems.Add((clsItem)cbMenuItemList.SelectedValue);
-                dg_InvoiceItemDisplay.ItemsSource = CurrentItems;
+                currentInvoice.InvoiceItems.Add((clsItem)cbMenuItemList.SelectedValue);
+                dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                 dg_InvoiceItemDisplay.Items.Refresh();
-                txt_TotalCost.Text = updateTotalCost();
+                txt_TotalCost.Text = MainLogic.updateTotalCost(currentInvoice);
 
                 if (dg_InvoiceItemDisplay.Items.Count == 1) 
                 { 
@@ -194,6 +213,11 @@ namespace GroupAssignment.Main
             }
         }
 
+        /// <summary>
+        /// Allows user to remove the selected item on the datagrid from the invoice.
+        /// </summary>
+        /// <param name="sender">remove item button</param>
+        /// <param name="e">click</param>
         private void btn_RemoveItem_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -202,10 +226,10 @@ namespace GroupAssignment.Main
                 {
                     return;
                 }
-                CurrentItems.Remove((clsItem)dg_InvoiceItemDisplay.SelectedValue);
-                dg_InvoiceItemDisplay.ItemsSource = CurrentItems;
+                currentInvoice.InvoiceItems.Remove((clsItem)dg_InvoiceItemDisplay.SelectedValue);
+                dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                 dg_InvoiceItemDisplay.Items.Refresh();
-                txt_TotalCost.Text = updateTotalCost();
+                txt_TotalCost.Text = MainLogic.updateTotalCost(currentInvoice);
 
                 if (dg_InvoiceItemDisplay.Items.Count == 0)
                 {
@@ -219,56 +243,12 @@ namespace GroupAssignment.Main
             }
         }
 
-        private void btn_Clear_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                defaultScreen();
-            }
-            catch (Exception ex)
-            {
-                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-
-        private void btn_SaveInvoice_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-        private void cbMenuItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                clsItem selectedItem = (clsItem)cbMenuItemList.SelectedItem;
-                if (selectedItem != null)
-                {
-                    txt_ItemCost.Text = selectedItem.ItemCost;
-                    btn_AddItem.IsEnabled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
-                    MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-        #endregion
-
-        #region Other Methods
-
         /// <summary>
-        /// Sets the default screen.
+        /// Clears the screen.
         /// </summary>
-        /// <exception cref="Exception"></exception>
-        private void defaultScreen()
+        /// <param name="sender">clear button</param>
+        /// <param name="e">click</param>
+        private void btn_Clear_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -290,29 +270,71 @@ namespace GroupAssignment.Main
             }
             catch (Exception ex)
             {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
 
-        private string updateTotalCost()
+        /// <summary>
+        /// Saves the currently edited invoice. Checks to see if invoice is new or if it is exists.
+        /// </summary>
+        /// <param name="sender">save invoice button</param>
+        /// <param name="e">click</param>
+        private void btn_SaveInvoice_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                int iTotalCost = 0;
-                foreach (clsItem item in dg_InvoiceItemDisplay.ItemsSource)
+                if (dp_InvoiceDate == null)
                 {
-                    Int32.TryParse( item.ItemCost, out int result);
-                    iTotalCost += result;
+                    dp_InvoiceDate.Focus();
+                    return;
                 }
-                currentInvoice.TotalCost = iTotalCost.ToString();
-                return iTotalCost.ToString();
+                // if currentInvoice.invoiceNum != ""
+                    //update invoice using main logic.
+
+                // else 
+                    // Save invoice using mainlogic.
+                    // set new invoice number to currentinvoice.
+                    // display new invoice number
+                        // mainlogic query top invoice number
+
+                btn_AddItem.IsEnabled = false;
+                btn_RemoveItem.IsEnabled = false;
+                cbMenuItemList.IsEnabled = false;
+                dg_InvoiceItemDisplay.IsEnabled = false;
+                btn_SaveInvoice.IsEnabled = false;
+
+                btn_EditInvoice.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Checks to see if an item has been selected from the combo box.
+        /// </summary>
+        /// <param name="sender">selected item from combo box</param>
+        /// <param name="e">click</param>
+        private void cbMenuItemList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                clsItem selectedItem = (clsItem)cbMenuItemList.SelectedItem;
+                if (selectedItem != null)
+                {
+                    txt_ItemCost.Text = selectedItem.ItemCost;
+                    btn_AddItem.IsEnabled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                errorHandler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
         #endregion
-
     }
 }
