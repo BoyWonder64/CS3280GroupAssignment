@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,23 +14,47 @@ namespace GroupAssignment.Main
     public class clsMainLogic
     {
         /// <summary>
+        /// data Access object.
+        /// </summary>
+        clsDataAccess dataAccess = new clsDataAccess();
+
+        /// <summary>
         /// List that will hold all of the items
         /// </summary>
         //private List<clsItems> itemList;
 
         /// <summary>
-        /// invoice from the clsInvoice class
+        /// The current invoice.
         /// </summary>
-         //clsInvoice invoice;
+        //clsInvoice currentInvoice;
 
-        //public List<clsItems> GetAllItems()
-        //{
-        //    return itemList;
-        //}
+        /// <summary>
+        /// The list of items per invoice.
+        /// </summary>
+        private List<clsItem> ItemList;
 
-        //public void SaveNewInvoice(invoice)
+        public void SaveNewInvoice(clsInvoice currentInvoice)
+        {
+            try
+            {
+                dataAccess.ExecuteNonQuery(clsMainSQL.InsertInvoice(currentInvoice.InvoiceDate, currentInvoice.TotalCost));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        //public void CreateNewInvoice()
         //{
-            //Save the invoice
+        //    try
+        //    {
+        //        clsInvoice newInvoice = new clsInvoice();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+        //    }
         //}
 
         //public void EditInvoice(invoiceNew, invoiceOld)
@@ -36,6 +63,59 @@ namespace GroupAssignment.Main
         //}
 
         //GetInvoice(InvoiceNumber) returns clsInvoice - Get the invoice and items for the selected invoice and search window
-    }
+        /// <summary>
+        /// Gets the invoice information using invoice number.
+        /// </summary>
+        /// <param name="invoiceNumber">invoice number</param>
+        /// <returns>clsInvoice</returns>
+        /// <exception cref="Exception"></exception>
+        public clsInvoice GetInvoice(string invoiceNumber) 
+        {
+            try
+            {
+                int itemCounter = 0;
+                DataSet ds = dataAccess.ExecuteSQLStatement(clsMainSQL.SelectInvoice(invoiceNumber), ref itemCounter);
+                if (itemCounter == 1) 
+                { 
+                    clsInvoice invoice = new clsInvoice();
+                    foreach (DataRow row in ds.Tables[0].Rows) 
+                    { 
+                        invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                        invoice.InvoiceDate = row["InvoiceDate"].ToString();
+                        invoice.TotalCost = row["TotalCost"].ToString();
+                    }
+                    return invoice;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
 
+        /// <summary>
+        /// Gets the items in the invoice.
+        /// </summary>
+        /// <param name="invoiceNum">invoice number.</param>
+        /// <returns>list of items</returns>
+        public List<clsItem> GetInvoiceItems(string invoiceNum)
+        {
+            List<clsItem> itemList = new();
+            int iRetVal = 0;
+            DataSet ds = dataAccess.ExecuteSQLStatement(clsMainSQL.SelectLineItem(invoiceNum), ref iRetVal);
+            foreach (DataRow row in ds.Tables[0].Rows )
+            {
+                clsItem item = new clsItem();
+                item.ItemCode = row["ItemCode"].ToString();
+                item.ItemDesc = row["ItemDesc"].ToString();
+                item.ItemCost = row["Cost"].ToString();
+                itemList.Add(item);
+            }
+            return itemList;
+        }
+    }
 }

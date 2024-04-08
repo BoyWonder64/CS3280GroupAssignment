@@ -10,38 +10,76 @@
         Title="Main Menu" Height="500" Width="800">
     <Grid Background="LightGray">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500*"/>
-            <ColumnDefinition Width="600*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
 
-        <Canvas Grid.Column="0" Grid.Row="0">
-            <Menu x:Name="mnu_Menu" Width="auto" Background="DarkGray" Height="19" FontSize="14">
-                <MenuItem x:Name="mnuBtn_SearchItem" Header="Search" Height="31" Width="85" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_Search_Click"/>
-                <MenuItem x:Name="mnuBtn_EditItem" Header="Edit Items" Height="31" Width="96" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"/>
+        <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="123*"/>
+                <RowDefinition Height="42*"/>
+                <RowDefinition Height="164*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Menu x:Name="mnu_Menu" Width="auto" Background="DarkGray" Height="19" FontSize="14" Grid.ColumnSpan="3" VerticalAlignment="Top">
+                <MenuItem x:Name="btn_SearchInvoice" Header="Search Invoice" Height="31" Width="113" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_Search_Click"/>
+                <MenuItem x:Name="btn_EditItem" Header="Edit Items" Height="31" Width="128" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"/>
             </Menu>
 
-            <Label x:Name ="lbl_InvoiceDate"  Content="Invoice Date:" Canvas.Left="10" Canvas.Top="69" FontFamily="Cinzel Black" FontSize="20"/>
-            <Label x:Name ="lbl_InvoiceNumber"  Content="Invoice Number:" Canvas.Left="10" Canvas.Top="111" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Label x:Name ="lbl_TotalCost"  Content="Total Cost:" Canvas.Left="10" Canvas.Top="180" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        </Canvas>
+            <Label x:Name ="lbl_InvoiceDate" Grid.Row="1" Content="Invoice Date:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label x:Name ="lbl_InvoiceNumber" Grid.Row="2" Content="Invoice Number:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <Label x:Name ="lbl_TotalCost" Grid.Row="3" Content="Total Cost:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-        <Canvas Grid.Column="0" Grid.Row="1">
-            <Button x:Name="btnEditInvoice" Content="Edit Invoice" Canvas.Left="24" Canvas.Top="285" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
-            <Button x:Name="btnSaveInvoice" Content="Save Invoice" Canvas.Left="224" Canvas.Top="285" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
-            <Button x:Name="btnCreateInvoice" Content="Create Invoice" Canvas.Left="118" Canvas.Top="339" Height="30" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <DatePicker x:Name="dp_InvoiceDate" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsTodayHighlighted="True" IsEnabled="False"/>
+            <TextBox x:Name="txt_InvoiceNumber" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsEnabled="False"/>
+            <TextBox x:Name="txt_TotalCost" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Width="130" IsEnabled="False"/>
 
-        </Canvas>
+            <Button x:Name="btn_CreateInvoice" Grid.Column="0" Grid.Row="5" Content="Create Invoice" Height="30" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="btn_CreateInvoice_Click"/>
+            <Button x:Name="btn_EditInvoice" Grid.Column="1" Grid.Row="5" Content="Edit Invoice" Height="30" Width="100" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,4" Click="btn_EditInvoice_Click" IsEnabled="False"/>
 
-        <Canvas Grid.Column="1" Grid.Row="1">
-            <Button x:Name="btnAddItem" Content="Add Item" Canvas.Left="22" Canvas.Top="193" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.509,0.132"/>
-            <Button x:Name="btnRemoveItem" Content="Remove Invoice" Canvas.Left="254" Canvas.Top="193" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" Width="110" RenderTransformOrigin="0.345,4.212"/>
-            <DataGrid Height="159" Width="390" d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Top="251" Canvas.Left="5"/>
-        </Canvas>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="79*"/>
+                <RowDefinition Height="79*"/>
+                <RowDefinition Height="79*"/>
+                <RowDefinition Height="174*"/>
+                <RowDefinition Height="73*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name ="lbl_Items" Content="Items:" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+            <Label x:Name ="lbl_ItemCost" Content="Cost:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="20"/>
+            <TextBox x:Name="txt_ItemCost" Grid.Column="1" Grid.Row="1" Width="100" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False"/>
+            <ComboBox x:Name="cbMenuItemList" Grid.Column="1"  FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Width="252" Height="30" SelectionChanged="cbMenuItemList_SelectionChanged" IsEnabled="False"/>
 
-        <Canvas Grid.Column="1" Grid.Row="0">
-            <Label x:Name ="lblcbItems" Content="Items" Canvas.Left="38" Canvas.Top="43" FontFamily="Cinzel Black" FontSize="20"/>
-            <ComboBox x:Name="cbMenuItemList" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Canvas.Left="138" Canvas.Top="50" Height="30"  />
-            <Label x:Name ="lblCost" Content="Cost" Canvas.Left="38" Canvas.Top="109" FontFamily="Cinzel Black" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20"/>
-        </Canvas>
+            <Grid Grid.ColumnSpan="2" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btn_AddItem" Content="Add Item" Grid.Column="0" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="btn_AddItem_Click" IsEnabled="False"/>
+                <Button x:Name="btn_RemoveItem" Content="Remove Item" Grid.Column="1" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Width="110" Click="btn_RemoveItem_Click" IsEnabled="False"/>
+            </Grid>
+
+            <DataGrid x:Name="dg_InvoiceItemDisplay" Grid.Row="2" Grid.ColumnSpan="2" Height="auto" Width="390" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" IsReadOnly="True" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="45,79,0,0" Grid.RowSpan="2" />
+            <Grid Grid.ColumnSpan="2" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="btn_Clear" Content="Clear" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="btn_Clear_Click"/>
+                <Button x:Name="btn_SaveInvoice" Grid.Column="1" Content="Save Invoice" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="btn_SaveInvoice_Click" IsEnabled="False"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

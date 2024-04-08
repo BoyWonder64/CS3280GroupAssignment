@@ -102,7 +102,7 @@ namespace GroupAssignment.Main
         /// <param name="invoiceNum">Invoice Number</param>
         /// <returns>string</returns>
         /// <exception cref="Exception"></exception>
-        public static string SelectInvoiceNumDateCost(string invoiceNum)
+        public static string SelectInvoice(string invoiceNum)
         {
             try
             {
