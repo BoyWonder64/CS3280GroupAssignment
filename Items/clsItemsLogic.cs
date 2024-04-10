@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using GroupAssignment.Common;
 
 namespace GroupAssignment.Items
@@ -17,18 +18,30 @@ namespace GroupAssignment.Items
         /// <summary>
         ///Will hold the full item list to display to the user
         /// </summary>
-        private List<clsItem> ItemList;
+        public static List<clsItem> ItemList;
 
         /// <summary>
-        /// Will serve as an item to be added
+        /// Creating this to remove redundency
+        /// Links to the Data Access
         /// </summary>
-        clsItem Item;
+         clsDataAccess db;
 
         /// <summary>
-        /// Will serve as connector to invoice class
+        /// Creating this to remove redundency
+        /// Links to the Data Set
         /// </summary>
-        clsInvoice Invoice;
+         DataSet ds;
 
+        /// <summary>
+        /// Constructors
+        /// </summary>
+        public clsItemsLogic()
+        {
+            ItemList = new List<clsItem>();
+            ds = new DataSet();
+            db = new clsDataAccess();
+
+        }
 
         /// <summary>
         /// Gathers a full list of items
@@ -39,14 +52,9 @@ namespace GroupAssignment.Items
         {
             try
             {
-                //create db object from the clsDataAccess class
-                clsDataAccess db = new clsDataAccess();
-                //Use the DataSet to create a ds object
-                DataSet ds = new DataSet();
+                ItemList = new List<clsItem>();
                 //Used as the sql counter
                 int iRet = 0;
-                //Create ItemList
-                ItemList = new List<clsItem>();
                 //Store the SQL search string inside ItemSQL
                 string ItemSQL = clsItemsSQL.SelectItem();
 
@@ -72,72 +80,124 @@ namespace GroupAssignment.Items
             return ItemList;
         }
 
-        //AddItem(clsItem)
+        /// <summary>
+        /// Performs the Add Item SQL statement and executes the sql statement
+        /// </summary>
+        /// <param name="NewItem"></param>
         public void AddItem(clsItem NewItem)
         {
-            //create db object from the clsDataAccess class
-            clsDataAccess db = new clsDataAccess();
-            //Use the DataSet to create a ds object
-            DataSet ds = new DataSet();
-            //Used as the sql counter
-            int iRet = 0;
+            try
+            {
+                //Used as the sql counter
+                int iRet = 0;
 
+                string ItemSQL = clsItemsSQL.AddItem(NewItem.ItemCode, NewItem.ItemDesc, NewItem.ItemCost);
 
-            string ItemSQL = clsItemsSQL.AddItem(NewItem.ItemCode, NewItem.ItemDesc, NewItem.ItemCost);
+                //Execute the query
+                ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
+            }
+            catch (Exception ex)
+            {
 
-            //Execute the query
-            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
-
-
+            }
+            
         }
 
-        //EditItem(clsItem clsOldItem, clsItem clsNewItem)
+        /// <summary>
+        /// Performs the EditItem SQL and executes the sql statement
+        /// </summary>
+        /// <param name="oldItem"></param>
+        /// <param name="newItem"></param>
         public void EditItem(clsItem oldItem, clsItem newItem)
         {
-            //create db object from the clsDataAccess class
-            clsDataAccess db = new clsDataAccess();
-            //Use the DataSet to create a ds object
-            DataSet ds = new DataSet();
-            //Used as the sql counter
-            int iRet = 0;
-            //Store the SQL search string inside ItemSQL
-            string ItemSQL = clsItemsSQL.EditItem(oldItem.ItemCode, oldItem.ItemDesc, oldItem.ItemCost, newItem.ItemCode, newItem.ItemDesc, newItem.ItemDesc);
-            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
+            try
+            {
+                if (oldItem.Equals(null))
+                {
+                    MessageBox.Show("Item Cannot be Empty!!!");
+                }
+                else
+                {
+                    //Used as the sql counter
+                    int iRet = 0;
+                    //Store the SQL search string inside ItemSQL
+                    string ItemSQL = clsItemsSQL.EditItem(newItem.ItemDesc, newItem.ItemCost, newItem.ItemCode);
+                    //Execute the Query
+                   iRet = db.ExecuteNonQuery(ItemSQL);
+
+                   if (iRet <= 0)
+                   {
+                        oldItem.ItemDesc = newItem.ItemDesc;
+                        oldItem.ItemCost = newItem.ItemCost;
+                        oldItem.ItemCode = newItem.ItemCode;
+                   }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+         
         }
 
-        //DeleteItem(clsItem clsItemtoDelete)
+        /// <summary>
+        /// Performs the Delete Items SQL and then executes the sql statement
+        /// </summary>
+        /// <param name="ItemToDelete"></param>
         public void DeleteItem(clsItem ItemToDelete)
         {
-            //create db object from the clsDataAccess class
-            clsDataAccess db = new clsDataAccess();
-            //Use the DataSet to create a ds object
-            DataSet ds = new DataSet();
-            //Used as the sql counter
-            int iRet = 0;
+            try
+            {
+                if (!IsItemOnInvoice(ItemToDelete))
+                {
+                    MessageBox.Show("Unable to remove Item, it is currently on an invoice");
+                }
+                else
+                {
+                    //Used as the sql counter
+                    int iRet = 0;
+                    //Store the SQL search string inside ItemSQL
+                    string ItemSQL = clsItemsSQL.DeleteItem(ItemToDelete.ItemCode);
+                    //Execure the Query
+                    iRet = db.ExecuteNonQuery(ItemSQL);
+                    //Refresh the List
+                    GetAllItems();
+                }
 
-            //Store the SQL search string inside ItemSQL
-            string ItemSQL = clsItemsSQL.DeleteItem(ItemToDelete.ItemCode);
-
-            //Execute the SQL statement using the clsDataAccess Class
-            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
-
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+            
         }
         
-        //IsItemOnInvoice(clsItem)
-        public void IsItemOnInvoice(clsItem Item)
+        /// <summary>
+        /// Performs the IsItemsOnInvoice SQL statement Then executes the statement
+        /// </summary>
+        /// <param name="Item"></param>
+        private bool IsItemOnInvoice(clsItem Item)
         {
-            //create db object from the clsDataAccess class
-            clsDataAccess db = new clsDataAccess();
-            //Use the DataSet to create a ds object
-            DataSet ds = new DataSet();
-            //Used as the sql counter
-            int iRet = 0;
-
-            string ItemSQL = clsItemsSQL.FindInvoiceNumberForItem(Item.ItemCode);
-
-            //Execute the SQL statement using the clsDataAccess Class
-            ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
-
+            try
+            {
+                for (int i = 0; i < ItemList.Count; i++)
+                {
+                    if (ItemList[i].ItemCode == Item.ItemCode)
+                    {
+                        return true;
+                    }
+                }
+                //else return false
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
 
         }
     

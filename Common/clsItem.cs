@@ -30,31 +30,10 @@ namespace GroupAssignment.Common
         public string ItemCode 
         { 
             get 
-            { 
-                try
-                {
-                    return sItemCode; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
+            { return sItemCode; } 
             set 
-            {  
-                try
-                {
-                    sItemCode = value; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
+            { sItemCode = value; }
+            
         }
 
         /// <summary>
@@ -63,31 +42,7 @@ namespace GroupAssignment.Common
         public string ItemDesc 
         { 
             get 
-            {  
-                try
-                {
-                    return sItemDesc; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
-            set 
-            { 
-                try
-                {
-                    sItemDesc = value; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
+            { return sItemDesc; } set { sItemDesc = value; } 
         }
 
         /// <summary>
@@ -96,49 +51,16 @@ namespace GroupAssignment.Common
         public string ItemCost 
         { 
             get 
-            {  
-                try
-                {
-                    return sItemCost; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
-            set 
-            { 
-                try
-                {
-                    sItemCost = value; 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                        + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                        + ex.Message);
-                }
-            } 
+            { return sItemCost; } set {sItemCost = value; } 
         }
 
         /// <summary>
         /// Override of ToString Method.
         /// </summary>
-        /// <returns>String</returns>
         public override string ToString()
         {
-            try
-            {
-                return sItemDesc;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name
-                                    + "." + MethodInfo.GetCurrentMethod().Name + " -> "
-                                    + ex.Message);
-            }
+                return ItemCode + " " + ItemDesc + " " + ItemCost ;
+            
         }
     }
 }

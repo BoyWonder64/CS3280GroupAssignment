@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GroupAssignment.Common;
 using GroupAssignment.Items;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GroupAssignment
 {
@@ -40,6 +41,9 @@ namespace GroupAssignment
         /// </summary>
         clsItem Item;
 
+        /// <summary>
+        /// I may need to use the currentInvoce. Adding this just in case
+        /// </summary>
         clsInvoice CurrentInvoice;
 
         /// <summary>
@@ -52,7 +56,7 @@ namespace GroupAssignment
         /// Set to true when an item has been/edited/deleted.
         /// Used by main window to know if it needs refreshing items list
         /// </summary>
-        private bool HasItemsBeenChanged = false;
+        public bool HasItemsBeenChanged = false;
 
         
        
@@ -68,7 +72,6 @@ namespace GroupAssignment
                 handler = new clsHandleError();
                 ItemLogic = new clsItemsLogic();
                 Item = new clsItem();
-
                 datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
                 CurrentInvoice = currentInvoice;
 
@@ -92,9 +95,32 @@ namespace GroupAssignment
         {
             try
             {
-                
-                HasItemsBeenChanged = true;
+                //Create a new Item obj
+                clsItem NewItem = new clsItem();
+                int ItemCost;
 
+                txt_ItemCodeTextBox.IsEnabled = true;
+                txt_ItemDescTextBox.IsEnabled = true;
+                txt_ItemCostTextBox.IsEnabled = true;
+
+                txt_ItemCodeTextBox.Text = "";
+                txt_ItemDescTextBox.Text = "";
+                txt_ItemCostTextBox.Text = "";
+
+                //If none of the text entries are empty
+
+                if (StringEntryChecker(txt_ItemCodeTextBox.Text) && int.TryParse(txt_ItemCostTextBox.Text, out ItemCost) )
+                    { 
+                        NewItem.ItemCode = txt_ItemCodeTextBox.Text;
+                        NewItem.ItemDesc = txt_ItemDescTextBox.Text;
+                        NewItem.ItemCost = txt_ItemCostTextBox.Text;
+
+                        ItemLogic.AddItem(NewItem);
+                        //Refresh the List
+                        datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+                    
+                    HasItemsBeenChanged = true;
+                    }
             }
             catch (Exception ex)
             {
@@ -104,8 +130,10 @@ namespace GroupAssignment
         }
 
         /// <summary>
-        /// Wnen the edit button is pressed. We will enable the screen
-        /// and then allow the user to manipulate the item to fig their needs 
+        /// When the edit button is pressed. We will enable the screen
+        /// and then allow the user to manipulate the item to fig their needs
+        ///
+        /// I have decided to not let the code get updated and will force it to remain
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -113,11 +141,10 @@ namespace GroupAssignment
         {
             try
             {
-                txt_ItemCodeTextBox.IsEnabled = true;
                 txt_ItemDescTextBox.IsEnabled = true;
                 txt_ItemCostTextBox.IsEnabled = true;
+                lblEditBtnHelpMsg.Visibility = Visibility.Visible;
 
-                HasItemsBeenChanged = true;
             }
             catch (Exception ex)
             {
@@ -138,8 +165,21 @@ namespace GroupAssignment
         {
             try
             {
-                HasItemsBeenChanged = true;
 
+                if (txt_ItemCodeTextBox.Text != null && txt_ItemDescTextBox.Text != null && txt_ItemCostTextBox.Text != null)
+                {
+                    //Get the ItemCode from the TextBox
+                    string sNewItem = txt_ItemCodeTextBox.Text; 
+                    //Alight our Item to the obj
+                    Item.ItemCode = sNewItem;
+                    //Perform the Delete SQL
+                    ItemLogic.DeleteItem(Item);
+                    //Refresh the List
+                    datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+                    HasItemsBeenChanged = true;
+
+                }
+                
             }
             catch (Exception ex)
             {
@@ -178,22 +218,45 @@ namespace GroupAssignment
                 }
                 else
                 {
-                    flag = StringEntryChecker(txt_ItemCodeTextBox.Text);
-                    if (flag == true)
+
+                    if (txt_ItemCodeTextBox.Text != null && txt_ItemDescTextBox.Text != null && txt_ItemCostTextBox.Text != null)
                     {
-                        //Set the user entry to Uppercase to keep formatting consistent
-                        string upperCaseCode = txt_ItemCodeTextBox.Text.ToUpper();
-                        //Place the entries into the object
-                        Item.ItemCode = upperCaseCode;
-                        Item.ItemDesc = txt_ItemDescTextBox.Text;
-                        Item.ItemCost = txt_ItemCostTextBox.Text;
-                        //Perform the logic and add the item
-                        ItemLogic.AddItem(Item);
+                        string ItemDesc = txt_ItemDescTextBox.Text;
+                        string ItemCost = txt_ItemCostTextBox.Text;
+
+                        //Checks that an item selected from the list is valid
+                        if (datag_ItemDataGrid.SelectedItem != null)
+                        {
+                            //Creates an item from the selected Item
+                            clsItem selectedItem = (clsItem)datag_ItemDataGrid.SelectedItem;
+                            clsItem NewItem = new clsItem();
+                            //Set the values for the new Item
+                            NewItem.ItemCode = selectedItem.ItemCode;
+                            NewItem.ItemDesc = ItemDesc;
+                            NewItem.ItemCost = ItemCost;
+
+                            //Perform the Update Logic
+                            ItemLogic.EditItem(selectedItem, NewItem);
+                            //Update the HasItemBeenChanged flag to notify the main screen to refresh
+                            HasItemsBeenChanged = true;
+
+                            //Refresh the List
+                            datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+
+                            //Disable the boxes
+                            txt_ItemDescTextBox.IsEnabled = false;
+                            txt_ItemCostTextBox.IsEnabled = false;
+
+                            //Wipe the errors clean
+                            errorReseter();
+                            
+                            //Hide the helpful message
+                            lblEditBtnHelpMsg.Visibility = Visibility.Hidden;
+                        }
 
                     }
 
                 }
-
             }
             catch (Exception ex)
             {
@@ -215,7 +278,7 @@ namespace GroupAssignment
         {
             try
             {
-                if (!Regex.IsMatch(userEntry, @"[a-zA-Z/]"))
+                if (!Regex.IsMatch(userEntry, @"[a-zA-Z/][0-9]"))
                 {
                     lblErr_CodeTxtBox.Content = "Must be single letter A-Z";
                     lblErr_CodeTxtBox.Visibility = Visibility.Visible;
@@ -239,13 +302,22 @@ namespace GroupAssignment
         /// </summary>
         private void errorReseter()
         {
-            lblErr_CodeTxtBox.Content = "Must be single letter A-Z";
-            lblErr_DescTxtBox.Content = "Must not be empty";
-            lblErr_CostTxtBox.Content = "Must be a number";
+            try
+            {
+                lblErr_CodeTxtBox.Content = "Must be single letter A-Z";
+                lblErr_DescTxtBox.Content = "Must not be empty";
+                lblErr_CostTxtBox.Content = "Must be a number";
 
-            lblErr_CodeTxtBox.Visibility = Visibility.Hidden;
-            lblErr_DescTxtBox.Visibility = Visibility.Hidden;
-            lblErr_CostTxtBox.Visibility = Visibility.Hidden;
+                lblErr_CodeTxtBox.Visibility = Visibility.Hidden;
+                lblErr_DescTxtBox.Visibility = Visibility.Hidden;
+                lblErr_CostTxtBox.Visibility = Visibility.Hidden;
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
         }
 
 
@@ -264,10 +336,16 @@ namespace GroupAssignment
         {
             try
             {
-                clsItem Item = (clsItem)datag_ItemDataGrid.SelectedItem;
-                txt_ItemCodeTextBox.Text = Item.ItemCode;
-                txt_ItemDescTextBox.Text = Item.ItemDesc;
-                txt_ItemCostTextBox.Text = Item.ItemCost;
+                clsItem selectedItem = (clsItem)datag_ItemDataGrid.SelectedItem;
+
+                if (selectedItem != null)
+                {
+                    txt_ItemCodeTextBox.Text = selectedItem.ItemCode;
+                    txt_ItemDescTextBox.Text = selectedItem.ItemDesc;
+                    txt_ItemCostTextBox.Text = selectedItem.ItemCost;
+                }
+                datag_ItemDataGrid.Items.Refresh();
+
             }
             catch (Exception ex)
             {

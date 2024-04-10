@@ -38,12 +38,13 @@
         </Canvas>
 
         <Canvas Grid.Column="0" Grid.Row="1">
-            <GroupBox Header="Options" Height="175" Width="263" Canvas.Left="23" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <GroupBox Header="Options" Height="196" Width="263" Canvas.Left="23" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <Canvas Margin="0,0,341,0">
-                    <Button x:Name ="btn_AddItem" Content="Add Item" Canvas.Left="20" Canvas.Top="76" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_AddItem_Click"/>
-                    <Button x:Name ="btn_EditItem" Content="Edit Item" Canvas.Left="20" Canvas.Top="19" HorizontalAlignment="Center" VerticalAlignment="Top" Height="33" Width="86" Click="btn_EditItem_Click"/>
-                    <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="137" Canvas.Top="76" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
-                    <Button x:Name ="btn_SaveItem" Content="Save Item" Canvas.Left="137" Canvas.Top="19" HorizontalAlignment="Left" Height="33" VerticalAlignment="Top" Width="81" Click="btn_SaveItem_Click"/>
+                    <Button x:Name ="btn_AddItem" Content="Add Item" Canvas.Left="20" Canvas.Top="112" Height="33" Width="86" HorizontalAlignment="Center" VerticalAlignment="Top" Click="btn_AddItem_Click"/>
+                    <Button x:Name ="btn_EditItem" Content="Edit Item" Canvas.Left="20" Canvas.Top="35" HorizontalAlignment="Center" VerticalAlignment="Top" Height="33" Width="86" Click="btn_EditItem_Click"/>
+                    <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="137" Canvas.Top="112" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
+                    <Button x:Name ="btn_SaveItem" Content="Save Item" Canvas.Left="137" Canvas.Top="35" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_SaveItem_Click"/>
+                    <Label x:Name ="lblEditBtnHelpMsg" Content="Press Save Item to maintain changes" Foreground="#FFAB2929" Canvas.Left="20" Canvas.Top="4" HorizontalAlignment="Left" VerticalAlignment="Center" Width="212" Visibility="Hidden"></Label>
                 </Canvas>
             </GroupBox>
         </Canvas>
