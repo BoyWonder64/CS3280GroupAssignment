@@ -45,6 +45,7 @@
                     <Button x:Name ="btn_DeleteItem" Content="Delete Item" Canvas.Left="137" Canvas.Top="112" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_DeleteItem_Click"/>
                     <Button x:Name ="btn_SaveItem" Content="Save Item" Canvas.Left="137" Canvas.Top="35" HorizontalAlignment="Center" Height="33" VerticalAlignment="Top" Width="81" Click="btn_SaveItem_Click"/>
                     <Label x:Name ="lblEditBtnHelpMsg" Content="Press Save Item to maintain changes" Foreground="#FFAB2929" Canvas.Left="20" Canvas.Top="4" HorizontalAlignment="Left" VerticalAlignment="Center" Width="212" Visibility="Hidden"></Label>
+                    <Label x:Name ="lblAddBtnHelpMsg" Content="Press Add Item Again Save" Foreground="#FFAB2929" Canvas.Left="20" Canvas.Top="86" HorizontalAlignment="Center" VerticalAlignment="Top" Width="212" Visibility="Hidden"></Label>
                 </Canvas>
             </GroupBox>
         </Canvas>

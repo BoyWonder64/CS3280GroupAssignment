@@ -28,6 +28,7 @@ namespace GroupAssignment.Items
             }
         }
 
+
         /// <summary>
         /// Collects a string for searching the LineItems to see if an invoice exists
         /// </summary>
@@ -38,7 +39,7 @@ namespace GroupAssignment.Items
         {
             try
             {
-                string sSQL = "SELECT distinct(InvoiceNum) from LineItems where ItemCode = " + sItemCode;
+                string sSQL = "SELECT distinct(InvoiceNum) from LineItems where ItemCode = " + "'"+ sItemCode+ "'";
                 return sSQL;
             }
             catch (Exception ex)
@@ -80,7 +81,7 @@ namespace GroupAssignment.Items
         {
             try
             {
-                string sSQL = "Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values("+ sItemCode +","+ sItemDesc+ ","+ sItemCost+")";
+                string sSQL = "Insert into ItemDesc(ItemCode, ItemDesc, Cost) Values('"+ sItemCode +"', '"+ sItemDesc+ "' ,'"+ sItemCost+"')";
                 return sSQL;
             }
             catch (Exception ex)

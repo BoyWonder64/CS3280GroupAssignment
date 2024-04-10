@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -21,16 +22,27 @@ namespace GroupAssignment.Items
         public static List<clsItem> ItemList;
 
         /// <summary>
+        /// Adding the invoice class
+        /// </summary>
+        private clsInvoice Invoice;
+
+        /// <summary>
         /// Creating this to remove redundency
         /// Links to the Data Access
         /// </summary>
-         clsDataAccess db;
+        clsDataAccess db;
 
         /// <summary>
         /// Creating this to remove redundency
         /// Links to the Data Set
         /// </summary>
          DataSet ds;
+
+        /// <summary>
+        /// Adding the invoice class to see if an item is present
+        /// 
+        /// </summary>
+        private clsInvoice invoice;
 
         /// <summary>
         /// Constructors
@@ -80,6 +92,9 @@ namespace GroupAssignment.Items
             return ItemList;
         }
 
+
+
+
         /// <summary>
         /// Performs the Add Item SQL statement and executes the sql statement
         /// </summary>
@@ -94,13 +109,19 @@ namespace GroupAssignment.Items
                 string ItemSQL = clsItemsSQL.AddItem(NewItem.ItemCode, NewItem.ItemDesc, NewItem.ItemCost);
 
                 //Execute the query
-                ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
-            }
-            catch (Exception ex)
-            {
+                iRet = db.ExecuteNonQuery(ItemSQL);
+
+                if (iRet > ItemList.Count)
+                {
+                    GetAllItems();
+                }
 
             }
-            
+            catch (Exception ex)
+            {throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+
+            }
         }
 
         /// <summary>
@@ -150,7 +171,7 @@ namespace GroupAssignment.Items
         {
             try
             {
-                if (!IsItemOnInvoice(ItemToDelete))
+                if (IsItemOnInvoice(ItemToDelete) == true)
                 {
                     MessageBox.Show("Unable to remove Item, it is currently on an invoice");
                 }
@@ -179,19 +200,28 @@ namespace GroupAssignment.Items
         /// Performs the IsItemsOnInvoice SQL statement Then executes the statement
         /// </summary>
         /// <param name="Item"></param>
-        private bool IsItemOnInvoice(clsItem Item)
+        public bool IsItemOnInvoice(clsItem Item)
         {
             try
             {
-                for (int i = 0; i < ItemList.Count; i++)
                 {
-                    if (ItemList[i].ItemCode == Item.ItemCode)
+                    //Used as the sql counter
+                    int iRet = 0;
+                    //Store the SQL search string inside ItemSQL
+                    string ItemSQL = clsItemsSQL.FindInvoiceNumberForItem(Item.ItemCode);
+                    //Execure the Query - We want the row count
+                    ds = db.ExecuteSQLStatement(ItemSQL, ref iRet);
+                    //If its greater than 0, then its on the table
+                    if (iRet > 0)
                     {
                         return true;
                     }
+                    //Its not on the invoice
+                    else
+                    {
+                        return false;
+                    }
                 }
-                //else return false
-                return false;
             }
             catch (Exception ex)
             {
@@ -200,6 +230,6 @@ namespace GroupAssignment.Items
             }
 
         }
-    
+
     }
 }
