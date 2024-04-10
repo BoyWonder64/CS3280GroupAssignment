@@ -47,17 +47,17 @@ namespace GroupAssignment
         clsInvoice CurrentInvoice;
 
         /// <summary>
-        /// The Item window will allow you to add and delete items
-        /// Display the items current, and display the code, desc, and cost
-        /// </summary>
-
-        /// <summary>
         /// Placeholder to help determine if the Items have been changed.
         /// Set to true when an item has been/edited/deleted.
         /// Used by main window to know if it needs refreshing items list
         /// </summary>
         public bool HasItemsBeenChanged = false;
 
+        /// <summary>
+        /// This will be used to tell me whether or not
+        /// the items text fields are empty or not
+        /// </summary>
+        private bool clearTextflag = false;
         
        
         /// <summary>
@@ -96,36 +96,41 @@ namespace GroupAssignment
         {
             try
             {
-                txt_ItemCodeTextBox.Text = "";
-                txt_ItemDescTextBox.Text = "";
-                txt_ItemCostTextBox.Text = "";
-
-                //Create a new Item obj
-                clsItem NewItem = new clsItem();
-                int ItemCost;
-
-                lblAddBtnHelpMsg.Visibility = Visibility.Visible;
-
-                txt_ItemCodeTextBox.IsEnabled = true;
-                txt_ItemDescTextBox.IsEnabled = true;
-                txt_ItemCostTextBox.IsEnabled = true;
-
-                //If none of the text entries are empty
-
-                if (StringEntryChecker(txt_ItemCodeTextBox.Text) && int.TryParse(txt_ItemCostTextBox.Text, out ItemCost) )
+                if (clearTextflag == true)
                 {
-                    NewItem.ItemCode = txt_ItemCodeTextBox.Text; 
-                    NewItem.ItemDesc = txt_ItemDescTextBox.Text;
-                    NewItem.ItemCost = txt_ItemCostTextBox.Text;
+                    //Create a new Item obj
+                    clsItem NewItem = new clsItem();
+                    int ItemCost;
 
-                    ItemLogic.AddItem(NewItem);
-                    //Refresh the List
+                    //If none of the text entries are empty
+                    if (StringEntryChecker(txt_ItemCodeTextBox.Text) && int.TryParse(txt_ItemCostTextBox.Text, out ItemCost))
+                    {
+                        NewItem.ItemCode = txt_ItemCodeTextBox.Text;
+                        NewItem.ItemDesc = txt_ItemDescTextBox.Text;
+                        NewItem.ItemCost = txt_ItemCostTextBox.Text;
+
+                        ItemLogic.AddItem(NewItem);
+                        //Refresh the List
+                        datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+
+                        HasItemsBeenChanged = true;
+                        lblAddBtnHelpMsg.Visibility = Visibility.Hidden;
+                    }
+
                     datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
-                    
-                    HasItemsBeenChanged = true;
+                }
+                else
+                {
+                    clearText();
+                    lblAddBtnHelpMsg.Visibility = Visibility.Visible;
+
+                    txt_ItemCodeTextBox.IsEnabled = true;
+                    txt_ItemDescTextBox.IsEnabled = true;
+                    txt_ItemCostTextBox.IsEnabled = true;
+
                 }
 
-                datag_ItemDataGrid.ItemsSource = ItemLogic.GetAllItems();
+
 
             }
             catch (Exception ex)
@@ -150,6 +155,7 @@ namespace GroupAssignment
                 txt_ItemDescTextBox.IsEnabled = true;
                 txt_ItemCostTextBox.IsEnabled = true;
                 lblEditBtnHelpMsg.Visibility = Visibility.Visible;
+                clearTextflag = false;
 
             }
             catch (Exception ex)
@@ -193,6 +199,7 @@ namespace GroupAssignment
                         
                         //Notify the Main Screen of changes
                         HasItemsBeenChanged = true;
+                        clearTextflag = false;
                     }
                     else
                     {
@@ -273,7 +280,8 @@ namespace GroupAssignment
                             txt_ItemCodeTextBox.IsEnabled = false;
                             txt_ItemDescTextBox.IsEnabled = false;
                             txt_ItemCostTextBox.IsEnabled = false;
-                          
+                            //Text is now in the fields
+                            clearTextflag = false;
 
                             //Wipe the errors clean
                             errorReseter();
@@ -372,6 +380,7 @@ namespace GroupAssignment
                     txt_ItemCodeTextBox.Text = selectedItem.ItemCode;
                     txt_ItemDescTextBox.Text = selectedItem.ItemDesc;
                     txt_ItemCostTextBox.Text = selectedItem.ItemCost;
+                    clearTextflag = false;
                 }
                 datag_ItemDataGrid.Items.Refresh();
 
@@ -398,5 +407,28 @@ namespace GroupAssignment
                 return false;
             }
         }
+
+
+        private void clearText()
+        {
+            txt_ItemCodeTextBox.Text = "";
+            txt_ItemDescTextBox.Text = "";
+            txt_ItemCostTextBox.Text = "";
+            clearTextflag = true;
+
+        }
+
+        /// <summary>
+        /// Allows the ability to reopen and close the window as many times as you like
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClosingWindow(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
     }
+
+
 }//End of Class
