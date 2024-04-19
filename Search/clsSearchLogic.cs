@@ -146,7 +146,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -176,7 +176,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -206,7 +206,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -237,7 +237,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -268,7 +268,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -300,7 +300,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 
@@ -331,7 +331,7 @@ namespace GroupAssignment.Search
                     clsInvoice invoice = new clsInvoice();
                     invoice.InvoiceNumber = row["InvoiceNum"].ToString();
                     invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
-                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    invoice.TotalCost = row["TotalCost"].ToString();
                     InvoiceList.Add(invoice);
                 }
 

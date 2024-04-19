@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -73,10 +74,13 @@ namespace GroupAssignment.Main
 
             ItemLogic = new clsItemsLogic();
             MainLogic = new clsMainLogic();
-            cbMenuItemList.ItemsSource = ItemLogic.GetAllItems(); 
+            cbMenuItemList.ItemsSource = ItemLogic.GetAllItems();
+            currentInvoice.InvoiceDate = DateTime.Today.ToShortDateString();
+            dp_InvoiceDate.SelectedDate = DateTime.Today;
         }
 
         #region ButtonClickMethods
+
         /// <summary>
         /// When selecting this menu option, it switches to the Search Screen
         /// </summary>
@@ -105,7 +109,7 @@ namespace GroupAssignment.Main
 
                     dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                     txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;
-                    txt_TotalCost.Text = currentInvoice.TotalCost;
+                    txt_TotalCost.Text = "$" + currentInvoice.TotalCost + ".00";
                     dp_InvoiceDate.Text = currentInvoice.InvoiceDate;
 
                     btn_EditInvoice.IsEnabled = true;
@@ -153,7 +157,7 @@ namespace GroupAssignment.Main
             try
             {
                 txt_InvoiceNumber.Text = "TBD";
-                currentInvoice = new clsInvoice();
+                //currentInvoice = new clsInvoice();
                 cbMenuItemList.IsEnabled = true;
                 dp_InvoiceDate.IsEnabled = true;
                 dg_InvoiceItemDisplay.IsEnabled = true;
@@ -206,6 +210,10 @@ namespace GroupAssignment.Main
                 {
                     btn_SaveInvoice.IsEnabled = true;
                 }
+                if (cbMenuItemList.SelectedValue == null)
+                {
+                    return;
+                }
 
                 currentInvoice.InvoiceItems.Add((clsItem)cbMenuItemList.SelectedValue);
                 dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
@@ -241,6 +249,7 @@ namespace GroupAssignment.Main
                 dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                 dg_InvoiceItemDisplay.Items.Refresh();
                 txt_TotalCost.Text = MainLogic.updateTotalCost(currentInvoice);
+                btn_SaveInvoice.IsEnabled = true;
 
                 if (dg_InvoiceItemDisplay.Items.Count == 0)
                 {
@@ -263,7 +272,7 @@ namespace GroupAssignment.Main
         {
             try
             {
-                dp_InvoiceDate.SelectedDate = null;
+                dp_InvoiceDate.SelectedDate = DateTime.Today;
                 txt_InvoiceNumber.Text = string.Empty;
                 txt_TotalCost.Text = string.Empty;
                 btn_EditInvoice.IsEnabled = false;
@@ -315,6 +324,7 @@ namespace GroupAssignment.Main
                 dp_InvoiceDate.IsEnabled = false;
 
                 btn_EditInvoice.IsEnabled = true;
+                SearchScreen.refreshInvoices();
             }
             catch (Exception ex)
             {

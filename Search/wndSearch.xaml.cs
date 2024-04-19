@@ -207,6 +207,21 @@ namespace GroupAssignment
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+        
+        public void refreshInvoices()
+        {
+            try
+            {
+                cbInvoiceNum.ItemsSource = SearchLogic.GetDistinctInvoiceNum();
+                cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
+                cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
+                dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
         #endregion
 
         #region PublicProperty

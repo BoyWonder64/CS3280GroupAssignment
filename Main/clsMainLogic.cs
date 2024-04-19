@@ -29,11 +29,13 @@ namespace GroupAssignment.Main
         {
             try
             {
+                int counter = 1;
                 dataAccess.ExecuteNonQuery(clsMainSQL.InsertInvoice(currentInvoice.InvoiceDate, currentInvoice.TotalCost));
                 currentInvoice.InvoiceNumber = dataAccess.ExecuteScalarSQL(clsMainSQL.getNewestInvoice());
                 foreach (clsItem item in currentInvoice.InvoiceItems)
                 {
-                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, "1", item.ItemCode));
+                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, counter.ToString(), item.ItemCode));
+                    counter++;
                 }
                 return currentInvoice.InvoiceNumber;
             }
@@ -53,11 +55,13 @@ namespace GroupAssignment.Main
         {
             try
             {
+                int counter = 1;
                 dataAccess.ExecuteNonQuery(clsMainSQL.DeleteLineItem(currentInvoice.InvoiceNumber));
                 foreach (clsItem item in currentInvoice.InvoiceItems)
                 {
                     // FIXME: need to figure out what "1" should be instead.
-                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, "1", item.ItemCode));
+                    dataAccess.ExecuteNonQuery(clsMainSQL.InsertLineItems(currentInvoice.InvoiceNumber, counter.ToString(), item.ItemCode));
+                    counter++;
                 }
                 dataAccess.ExecuteNonQuery(clsMainSQL.UpdateInvoice(currentInvoice.TotalCost, currentInvoice.InvoiceNumber));
             }
