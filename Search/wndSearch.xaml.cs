@@ -52,7 +52,7 @@ namespace GroupAssignment
         /// </summary>
         bool SelectedAnInvoice;
 
-        public wndSearch(clsInvoice currentInvoice)
+        public wndSearch()
         {
             InitializeComponent();
 
@@ -63,9 +63,9 @@ namespace GroupAssignment
             cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
             cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
             dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
-
-            CurrentInvoice = currentInvoice;
         }
+
+        #region Methods
 
         /// <summary>
         /// BUtton that will send the user to the mainscreen after unputing invoice data
@@ -102,25 +102,6 @@ namespace GroupAssignment
             {
                 handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
-            }
-        }
-
-
-        /// <summary>
-        /// Public property for to see if there was an invoice selected.
-        /// </summary>
-        public bool IsSelectedAnInvoice
-        {
-            get
-            {
-                try
-                {
-                    return SelectedAnInvoice;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-                }
             }
         }
 
@@ -226,5 +207,41 @@ namespace GroupAssignment
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+        #endregion
+
+        #region PublicProperty
+        /// <summary>
+        /// Public property for to see if there was an invoice selected.
+        /// </summary>
+        public bool IsSelectedAnInvoice
+        {
+            get
+            {
+                try
+                {
+                    return SelectedAnInvoice;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+        }
+
+        public clsInvoice selectedInvoice
+        {
+            get
+            {
+                try
+                {
+                    return CurrentInvoice;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+                }
+            }
+        }
+        #endregion
     }
 }
