@@ -59,10 +59,11 @@ namespace GroupAssignment
             MainLogic = new clsMainLogic();
             handler = new clsHandleError();
             SearchLogic = new clsSearchLogic();
-            //dgInvoice.ItemsSource = ItemLogic.GetAllItems();
             cbInvoiceNum.ItemsSource = SearchLogic.GetDistinctInvoiceNum();
             cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
             cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
+            dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
+
             CurrentInvoice = currentInvoice;
         }
 
@@ -73,37 +74,37 @@ namespace GroupAssignment
         /// <param name="e"></param>
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            // Check if all drop boxes are selected.
-                // then...
-                CurrentInvoice.InvoiceNumber = dropNum.Text;
-                CurrentInvoice.TotalCost = dropCost.Text;
-                CurrentInvoice.InvoiceDate = dropDate.Text;
-                SelectedAnInvoice = true;
-                this.Hide();
-            // if not return.
+            try
+            {
+                if (dgInvoice.SelectedValue != null)
+                {
+                    CurrentInvoice = (clsInvoice)dgInvoice.SelectedValue;
+                    SelectedAnInvoice = true;
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            SelectedAnInvoice = true;
-            this.Hide();
+            try
+            {
+                btnClear_Click(sender, e);
+                SelectedAnInvoice = false;
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
         }
 
-
-
-        //USER WILL SELECT AN INVOICE AND THE INVOICE ID WILL HAVE TO BE SENT BACK TO THE MAIN WINDOW,
-        //CREATE A (PROPERTY) THAT THE MAIN WINDOW CAN CHECK TO SEE IF AN INVOICE WAS ACTUALLY SELECTED,
-        //SO THAT WE CAN LOAD THAT INVOICE INTO THE MAIN WINDOW.
-
-
-        //SELECT INVOICE CLICK(NEEDS TO SET A LOCAL VARIABLE THAT HOLDS THE INVOICE ID, THEN THE MAIN
-        //WINDOW CAN ACCES THAT VIA A PROPERTY AND WILL KNOW WETHER IT HAS BEEN SELECTED SO WE CAN JUMP
-        //TO THE MAIN WINDOW.
-
-
-        //PASS IN WHATEVER THE USER HAS SELECTED OF DATE, NUMBER, AND COST. FOR EACH SELECTION IF DATE
-        //HAS BEEN SELECTED PASS IN NULL FOR THE OTHERS UNTIL THEY ARE SELECTED THEN YOU GET THAT
-        //FILTERING AFFECT.
 
         /// <summary>
         /// Public property for to see if there was an invoice selected.
@@ -123,5 +124,107 @@ namespace GroupAssignment
             }
         }
 
+        private void cbInvoiceNum_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ComboBox cb = sender as ComboBox;
+                if (cb.SelectedIndex == -1) { return; }
+                if (cbInoiveDate.SelectedValue == null )
+                {
+                    if (cbTotalCost.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNum(cb.SelectedValue.ToString());
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByCostNum(cbTotalCost.Text, cb.SelectedValue.ToString());
+                }
+                else
+                {
+                    if (cbTotalCost.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNumDate(cbInoiveDate.Text, cb.SelectedValue.ToString());
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNumDateCost(cb.SelectedValue.ToString(), cbInoiveDate.Text, cbTotalCost.Text);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void cbInoiveDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ComboBox cb = sender as ComboBox;
+                if (cb.SelectedIndex == -1) { return; }
+                if (cbInvoiceNum.SelectedValue == null )
+                {
+                    if (cbTotalCost.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByDate(cb.SelectedValue.ToString());
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByCostDate(cbTotalCost.Text, cb.SelectedValue.ToString());
+                }
+                else
+                {
+                    if (cbTotalCost.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNumDate(cb.SelectedValue.ToString(), cbInvoiceNum.Text);
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNumDateCost(cbInvoiceNum.Text, cb.SelectedValue.ToString(), cbTotalCost.Text);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void cbTotalCost_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ComboBox cb = sender as ComboBox;
+                if (cb.SelectedIndex == -1) { return; }
+                if (cbInvoiceNum.SelectedValue == null )
+                {
+                    if (cbInoiveDate.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByCost(cb.SelectedValue.ToString());
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByCostDate(cb.SelectedValue.ToString(), cbInoiveDate.Text);
+                }
+                else
+                {
+                    if (cbInoiveDate.SelectedValue == null) 
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByCostNum(cb.SelectedValue.ToString(), cbInvoiceNum.Text);
+                    else
+                        dgInvoice.ItemsSource = SearchLogic.SelectInvoicesByNumDateCost(cbInvoiceNum.Text, cbInoiveDate.Text, cb.SelectedValue.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
+
+        private void btnClear_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                cbInvoiceNum.SelectedIndex = -1;
+                cbInoiveDate.SelectedIndex = -1;
+                cbTotalCost.SelectedIndex = -1;
+                dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
+            }
+            catch (Exception ex)
+            {
+                handler.HandleError(MethodInfo.GetCurrentMethod().DeclaringType.Name,
+                    MethodInfo.GetCurrentMethod().Name, ex.Message);
+            }
+        }
     }
 }

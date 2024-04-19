@@ -19,43 +19,30 @@ namespace GroupAssignment.Search
         /// </summary>
         clsInvoice Invoice;
 
-        private List<clsInvoice> InvoiceList;
-
-        //GetInvoices(InvoiceNumber, InvoiceDate, TotalCost)
-
         clsDataAccess db = new clsDataAccess();
 
-
-
-        ///SelectInvoice
-
         /// <summary>
-        /// Gets the invoice information using invoice number.
+        /// Select Everything in invoices 
         /// </summary>
-        /// <param name="invoiceNumber">invoice number</param>
-        /// <returns>clsInvoice</returns>
+        /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public clsInvoice GetInvoice(string invoiceNumber)
+        public List<clsInvoice> GetAllInvoices() 
         {
             try
             {
-                int itemCounter = 0;
-                DataSet ds = db.ExecuteSQLStatement(clsMainSQL.SelectInvoice(invoiceNumber), ref itemCounter);
-                if (itemCounter == 1)
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectAll(), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
                 {
                     clsInvoice invoice = new clsInvoice();
-                    foreach (DataRow row in ds.Tables[0].Rows)
-                    {
-                        invoice.InvoiceNumber = row["InvoiceNum"].ToString();
-                        invoice.InvoiceDate = row["InvoiceDate"].ToString();
-                        invoice.TotalCost = row["TotalCost"].ToString();
-                    }
-                    return invoice;
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = row["TotalCost"].ToString();
+                    InvoiceList.Add(invoice);
                 }
-                else
-                {
-                    return null;
-                }
+
+                return InvoiceList;
             }
             catch (Exception ex)
             {
@@ -63,6 +50,11 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Select distinct number from invoices
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<string> GetDistinctInvoiceNum() 
         {
             try
@@ -84,6 +76,11 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Select distinct date from invoices
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<string> GetDistinctInvoiceDate() 
         {
             try
@@ -93,8 +90,8 @@ namespace GroupAssignment.Search
                 DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectDistinctDate(), ref ret);
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    string num = row["InvoiceDate"].ToString();
-                    InvoiceDateList.Add(num);
+                    string date = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    InvoiceDateList.Add(date);
                 }
 
                 return InvoiceDateList;
@@ -105,6 +102,11 @@ namespace GroupAssignment.Search
             }
         }
 
+        /// <summary>
+        /// Select distinct cost from invoices
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public List<string> GetDistinctCost() 
         {
             try
@@ -114,11 +116,226 @@ namespace GroupAssignment.Search
                 DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectDistinctCost(), ref ret);
                 foreach (DataRow row in ds.Tables[0].Rows)
                 {
-                    string num = row["TotalCost"].ToString();
-                    InvoiceCostList.Add(num);
+                    string cost = row["TotalCost"].ToString();
+                    InvoiceCostList.Add(cost);
                 }
 
                 return InvoiceCostList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Select everything from invoice number
+        /// </summary>
+        /// <param name="sInvoiceNumer"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByNum(string sInvoiceNumer) 
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceNum(sInvoiceNumer), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Select everything from invoice date
+        /// </summary>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByDate(string sInvoiceDate) 
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceDate(sInvoiceDate), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// select everything from invoice cost
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByCost(string sTotalCost)
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceCost(sTotalCost), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// select everything from invoice number and date
+        /// </summary>
+        /// <param name="sInvoiceDate"></param>
+        /// <param name="sInvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByNumDate(string sInvoiceDate, string sInvoiceNumber)
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceNumDate(sInvoiceDate, sInvoiceNumber), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// select everything using invoice number and cost
+        /// </summary>
+        /// <param name="sInvoiceDate"></param>
+        /// <param name="sInvoiceNumber"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByCostNum(string sTotalCost, string sInvoiceNumber)
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceCostNum(sTotalCost, sInvoiceNumber), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// select everything from invoice number, date, and cost
+        /// </summary>
+        /// <param name="sInvoiceNumber"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <param name="sTotalCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByNumDateCost(string sInvoiceNumber, string sInvoiceDate, string sTotalCost)
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceNumDateCost(sInvoiceNumber, sInvoiceDate, sTotalCost), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// select everything from invoice cost and date
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <param name="sInvoiceDate"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public List<clsInvoice> SelectInvoicesByCostDate(string sTotalCost, string sInvoiceDate)
+        {
+            try
+            {
+                List<clsInvoice> InvoiceList = new List<clsInvoice>();
+                int ret = 0;
+                DataSet ds = db.ExecuteSQLStatement(clsSearchSQL.SelectInvoiceCostDate(sTotalCost, sInvoiceDate), ref ret);
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    clsInvoice invoice = new clsInvoice();
+                    invoice.InvoiceNumber = row["InvoiceNum"].ToString();
+                    invoice.InvoiceDate = DateTime.Parse(row["InvoiceDate"].ToString()).ToShortDateString();
+                    invoice.TotalCost = string.Format("${0:#.00}", Convert.ToDecimal(row["TotalCost"].ToString()));
+                    InvoiceList.Add(invoice);
+                }
+
+                return InvoiceList;
             }
             catch (Exception ex)
             {

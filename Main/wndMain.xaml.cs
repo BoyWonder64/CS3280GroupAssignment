@@ -96,18 +96,18 @@ namespace GroupAssignment.Main
                 else
                 {
                     // FIXME: need to re-enable
-                    //dp_InvoiceDate.SelectedDate = DateTime.Parse(currentInvoice.InvoiceDate);
-                    //txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;
-                    //txt_TotalCost.Text = currentInvoice.TotalCost;
+                    dp_InvoiceDate.SelectedDate = DateTime.Parse(currentInvoice.InvoiceDate);
+                    txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;
+                    txt_TotalCost.Text = currentInvoice.TotalCost;
 
-                    //currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems(currentInvoice.InvoiceNumber);
-                    //dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
+                    currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems(currentInvoice.InvoiceNumber);
+                    dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
 
                     // FIXME: need to remove hard coded values.
-                    currentInvoice.InvoiceNumber = "5000";
-                    currentInvoice.TotalCost = "170";
-                    currentInvoice.InvoiceDate = "8/12/2022";
-                    currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems("5000");
+                    //currentInvoice.InvoiceNumber = "5000";
+                    //currentInvoice.TotalCost = "170";
+                    //currentInvoice.InvoiceDate = "8/12/2022";
+                    //currentInvoice.InvoiceItems = MainLogic.GetInvoiceItems("5000");
 
                     dg_InvoiceItemDisplay.ItemsSource = currentInvoice.InvoiceItems;
                     txt_InvoiceNumber.Text = currentInvoice.InvoiceNumber;

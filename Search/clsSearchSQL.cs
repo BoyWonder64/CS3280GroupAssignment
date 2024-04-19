@@ -125,6 +125,26 @@ namespace GroupAssignment.Search
         }
 
         /// <summary>
+        /// Select Everything From Selected Cost and Date
+        /// </summary>
+        /// <param name="sTotalCost"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static string SelectInvoiceCostNum(string sTotalCost, string sInvoiceNumber)
+        {
+            try
+            {
+                string sSQL = "SELECT * FROM Invoices WHERE TotalCost = " + sTotalCost + "AND InvoiceNum = " + sInvoiceNumber;
+                return sSQL;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." +
+                                    MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Select Everything From Selected Date
         /// </summary>
         /// <param name="sTotalCost"></param>
