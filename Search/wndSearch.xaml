@@ -10,16 +10,16 @@
         <Grid.Background>
             <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
         </Grid.Background>
-        <DataGrid x:Name="dgInvoice" HorizontalAlignment="Center" Height="127" Margin="0,246,0,0" VerticalAlignment="Top" Width="368" d:ItemsSource="{d:SampleData ItemCount=1}"/>
+        <DataGrid x:Name="dgInvoice" HorizontalAlignment="Left" Height="269" Margin="76,122,0,0" VerticalAlignment="Top" Width="494" d:ItemsSource="{d:SampleData ItemCount=10}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeRows="False" IsReadOnly="True" IsEnabled="False"/>
         <Label x:Name="lblNum" Content="Invoice Number:" HorizontalAlignment="Left" Height="30" Margin="76,68,0,0" VerticalAlignment="Top" Width="99"/>
         <Label x:Name="lblDate" Content="Invoice Date:" HorizontalAlignment="Left" Height="30" Margin="295,69,0,0" VerticalAlignment="Top" Width="80"/>
         <Label x:Name="lblCost" Content="Invoice Cost:" HorizontalAlignment="Left" Height="30" Margin="495,70,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Height="38" Margin="216,154,0,0" VerticalAlignment="Top" Width="103"/>
-        <Button x:Name="btnSelect" Content="SELECT" HorizontalAlignment="Left" Height="38" Margin="481,154,0,0" VerticalAlignment="Top" Width="103" Click="btnSelect_Click"/>
-        <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Left" Height="38" Margin="350,154,0,0" VerticalAlignment="Top" Width="104" Click="btnCancel_Click"/>
-        <ComboBox x:Name="dropNum" HorizontalAlignment="Left" Margin="175,71,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
-        <ComboBox x:Name="dropDate" HorizontalAlignment="Left" Margin="375,72,0,0" VerticalAlignment="Top" Width="120" IsDropDownOpen="True"/>
-        <ComboBox x:Name="dropCost" HorizontalAlignment="Left" Margin="570,72,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnClear" Content="CLEAR" HorizontalAlignment="Left" Height="38" Margin="645,272,0,0" VerticalAlignment="Top" Width="103"/>
+        <Button x:Name="btnSelect" Content="SELECT" HorizontalAlignment="Left" Height="38" Margin="645,140,0,0" VerticalAlignment="Top" Width="103" Click="btnSelect_Click"/>
+        <Button x:Name="btnCancel" Content="CANCEL" HorizontalAlignment="Left" Height="38" Margin="645,0,0,0" VerticalAlignment="Center" Width="104" Click="btnCancel_Click"/>
+        <ComboBox x:Name="cbInvoiceNum" HorizontalAlignment="Left" Margin="175,71,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cbInoiveDate" HorizontalAlignment="Left" Margin="375,72,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="cbTotalCost" HorizontalAlignment="Left" Margin="570,72,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>

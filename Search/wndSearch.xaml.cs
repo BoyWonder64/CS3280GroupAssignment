@@ -1,6 +1,7 @@
 using GroupAssignment.Common;
 using GroupAssignment.Items;
 using GroupAssignment.Main;
+using GroupAssignment.Search;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,7 @@ namespace GroupAssignment
         /// <summary>
         /// This will serve as the itemLogic link
         /// </summary>
-        clsItemsLogic ItemLogic;
+        clsSearchLogic SearchLogic;
 
         /// <summary>
         /// Flag to see if selected an invoice.
@@ -57,8 +58,11 @@ namespace GroupAssignment
 
             MainLogic = new clsMainLogic();
             handler = new clsHandleError();
-            ItemLogic = new clsItemsLogic();
-            dgInvoice.ItemsSource = ItemLogic.GetAllItems();
+            SearchLogic = new clsSearchLogic();
+            //dgInvoice.ItemsSource = ItemLogic.GetAllItems();
+            cbInvoiceNum.ItemsSource = SearchLogic.GetDistinctInvoiceNum();
+            cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
+            cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
             CurrentInvoice = currentInvoice;
         }
 
@@ -84,6 +88,8 @@ namespace GroupAssignment
             SelectedAnInvoice = true;
             this.Hide();
         }
+
+
 
         //USER WILL SELECT AN INVOICE AND THE INVOICE ID WILL HAVE TO BE SENT BACK TO THE MAIN WINDOW,
         //CREATE A (PROPERTY) THAT THE MAIN WINDOW CAN CHECK TO SEE IF AN INVOICE WAS ACTUALLY SELECTED,
