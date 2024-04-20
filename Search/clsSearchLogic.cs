@@ -24,7 +24,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select Everything in invoices 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of cost date and number type strings</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> GetAllInvoices() 
         {
@@ -53,7 +53,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select distinct number from invoices
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of num type string</returns>
         /// <exception cref="Exception"></exception>
         public List<string> GetDistinctInvoiceNum() 
         {
@@ -79,7 +79,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select distinct date from invoices
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of date type string</returns>
         /// <exception cref="Exception"></exception>
         public List<string> GetDistinctInvoiceDate() 
         {
@@ -105,7 +105,7 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select distinct cost from invoices
         /// </summary>
-        /// <returns></returns>
+        /// <returns>a list of cost type string</returns>
         /// <exception cref="Exception"></exception>
         public List<string> GetDistinctCost() 
         {
@@ -131,8 +131,8 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select everything from invoice number
         /// </summary>
-        /// <param name="sInvoiceNumer"></param>
-        /// <returns></returns>
+        /// <param name="sInvoiceNumer">invoice num</param>
+        /// <returns>list of invoices</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByNum(string sInvoiceNumer) 
         {
@@ -161,8 +161,8 @@ namespace GroupAssignment.Search
         /// <summary>
         /// Select everything from invoice date
         /// </summary>
-        /// <param name="sInvoiceDate"></param>
-        /// <returns></returns>
+        /// <param name="sInvoiceDate">invoice date</param>
+        /// <returns>list of dates</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByDate(string sInvoiceDate) 
         {
@@ -191,8 +191,8 @@ namespace GroupAssignment.Search
         /// <summary>
         /// select everything from invoice cost
         /// </summary>
-        /// <param name="sTotalCost"></param>
-        /// <returns></returns>
+        /// <param name="sTotalCost">total cost</param>
+        /// <returns>list of costs</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByCost(string sTotalCost)
         {
@@ -221,9 +221,9 @@ namespace GroupAssignment.Search
         /// <summary>
         /// select everything from invoice number and date
         /// </summary>
-        /// <param name="sInvoiceDate"></param>
-        /// <param name="sInvoiceNumber"></param>
-        /// <returns></returns>
+        /// <param name="sInvoiceDate"> invoice date</param>
+        /// <param name="sInvoiceNumber"> invoice num</param>
+        /// <returns>invoice number and invoice date</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByNumDate(string sInvoiceDate, string sInvoiceNumber)
         {
@@ -252,9 +252,9 @@ namespace GroupAssignment.Search
         /// <summary>
         /// select everything using invoice number and cost
         /// </summary>
-        /// <param name="sInvoiceDate"></param>
-        /// <param name="sInvoiceNumber"></param>
-        /// <returns></returns>
+        /// <param name="sTotalCost">total cost</param>
+        /// <param name="sInvoiceNumber">invoice num</param>
+        /// <returns>list of invoice cost and number</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByCostNum(string sTotalCost, string sInvoiceNumber)
         {
@@ -283,10 +283,10 @@ namespace GroupAssignment.Search
         /// <summary>
         /// select everything from invoice number, date, and cost
         /// </summary>
-        /// <param name="sInvoiceNumber"></param>
-        /// <param name="sInvoiceDate"></param>
-        /// <param name="sTotalCost"></param>
-        /// <returns></returns>
+        /// <param name="sInvoiceNumber">invoice num</param>
+        /// <param name="sInvoiceDate">invoice date</param>
+        /// <param name="sTotalCost">total cost</param>
+        /// <returns>list of date num and cost of invoices</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByNumDateCost(string sInvoiceNumber, string sInvoiceDate, string sTotalCost)
         {
@@ -315,9 +315,9 @@ namespace GroupAssignment.Search
         /// <summary>
         /// select everything from invoice cost and date
         /// </summary>
-        /// <param name="sTotalCost"></param>
-        /// <param name="sInvoiceDate"></param>
-        /// <returns></returns>
+        /// <param name="sTotalCost">total cost</param>
+        /// <param name="sInvoiceDate">invoice date</param>
+        /// <returns>list of invoice costs and dates</returns>
         /// <exception cref="Exception"></exception>
         public List<clsInvoice> SelectInvoicesByCostDate(string sTotalCost, string sInvoiceDate)
         {
