@@ -29,8 +29,8 @@
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
             <Menu x:Name="mnu_Menu" Width="auto" Background="DarkGray" Height="19" FontSize="14" Grid.ColumnSpan="3" VerticalAlignment="Top">
-                <MenuItem x:Name="btn_SearchInvoice" Header="Search Invoice" Height="31" Width="113" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_Search_Click"/>
-                <MenuItem x:Name="btn_EditItem" Header="Edit Items" Height="31" Width="128" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"/>
+                <MenuItem x:Name="btn_SearchInvoice" Header="Search Invoice" Height="31" Width="173" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_Search_Click"/>
+                <MenuItem x:Name="btn_EditItem" Header="Edit Items" Height="31" Width="196" VerticalAlignment="Center" HorizontalAlignment="Center" Click="MenuOption_EditItems_Click"/>
             </Menu>
 
             <Label x:Name ="lbl_InvoiceDate" Grid.Row="1" Content="Invoice Date:" FontFamily="Cinzel Black" FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"/>
