@@ -52,6 +52,9 @@ namespace GroupAssignment
         /// </summary>
         bool SelectedAnInvoice;
 
+        /// <summary>
+        /// attributes
+        /// </summary>
         public wndSearch()
         {
             InitializeComponent();
@@ -90,6 +93,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// brings user back to main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -104,7 +112,11 @@ namespace GroupAssignment
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
-
+        /// <summary>
+        /// checks cost, date, and number for nulls to filter through data with every selection changed in number
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbInvoiceNum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -134,6 +146,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// checks cost, date, and number for nulls to filter through data with every selection changed in date
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbInoiveDate_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -163,6 +180,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// checks cost, date, and number for nulls to filter through data with every selection changed in cost
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbTotalCost_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -192,6 +214,11 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// clears data in drop boxes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -207,7 +234,10 @@ namespace GroupAssignment
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
-        
+        /// <summary>
+        /// refreshes invoices
+        /// </summary>
+        /// <exception cref="Exception"></exception>
         public void refreshInvoices()
         {
             try
@@ -216,10 +246,6 @@ namespace GroupAssignment
                 cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
                 cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
                 dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
-
-                cbInvoiceNum.SelectedIndex = -1;
-                cbInoiveDate.SelectedIndex = -1;
-                cbTotalCost.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
