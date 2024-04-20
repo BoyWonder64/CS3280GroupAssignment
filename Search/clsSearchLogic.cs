@@ -19,6 +19,9 @@ namespace GroupAssignment.Search
         /// </summary>
         clsInvoice Invoice;
 
+        /// <summary>
+        /// The clsDataAccess object.
+        /// </summary>
         clsDataAccess db = new clsDataAccess();
 
         /// <summary>

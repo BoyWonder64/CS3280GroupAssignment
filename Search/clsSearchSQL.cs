@@ -227,10 +227,5 @@ namespace GroupAssignment.Search
                                     MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
             }
         }
-        /*
-        SELECT DISTINCT(InvoiceNum) From Invoices order by InvoiceNum
-        SELECT DISTINCT(InvoiceDate) From Invoices order by InvoiceDate
-        SELECT DISTINCT(TotalCost) From Invoices order by TotalCost */
-
         }
 }

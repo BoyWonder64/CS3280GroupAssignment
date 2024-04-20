@@ -234,6 +234,7 @@ namespace GroupAssignment
                     MethodInfo.GetCurrentMethod().Name, ex.Message);
             }
         }
+
         /// <summary>
         /// refreshes invoices
         /// </summary>
@@ -273,6 +274,9 @@ namespace GroupAssignment
             }
         }
 
+        /// <summary>
+        /// Public property that returns the current selected invoice.
+        /// </summary>
         public clsInvoice selectedInvoice
         {
             get

@@ -71,41 +71,6 @@ namespace GroupAssignment.Main
             }
         }
 
-        /////////////////////////////////MIGHT NOT NEED THIS///////////////////////////////////////////////////
-        /// <summary>
-        /// Gets the invoice information using invoice number.
-        /// </summary>
-        /// <param name="invoiceNumber">invoice number</param>
-        /// <returns>clsInvoice</returns>
-        /// <exception cref="Exception"></exception>
-        public clsInvoice GetInvoice(string invoiceNumber) 
-        {
-            try
-            {
-                int itemCounter = 0;
-                DataSet ds = dataAccess.ExecuteSQLStatement(clsMainSQL.SelectInvoice(invoiceNumber), ref itemCounter);
-                if (itemCounter == 1) 
-                { 
-                    clsInvoice invoice = new clsInvoice();
-                    foreach (DataRow row in ds.Tables[0].Rows) 
-                    { 
-                        invoice.InvoiceNumber = row["InvoiceNum"].ToString();
-                        invoice.InvoiceDate = row["InvoiceDate"].ToString();
-                        invoice.TotalCost = row["TotalCost"].ToString();
-                    }
-                    return invoice;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(MethodInfo.GetCurrentMethod().DeclaringType.Name + "." + MethodInfo.GetCurrentMethod().Name + " -> " + ex.Message);
-            }
-        }
-
         /// <summary>
         /// Gets the items in the invoice.
         /// </summary>
