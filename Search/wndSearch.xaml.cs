@@ -216,6 +216,10 @@ namespace GroupAssignment
                 cbInoiveDate.ItemsSource = SearchLogic.GetDistinctInvoiceDate();
                 cbTotalCost.ItemsSource = SearchLogic.GetDistinctCost();
                 dgInvoice.ItemsSource = SearchLogic.GetAllInvoices();
+
+                cbInvoiceNum.SelectedIndex = -1;
+                cbInoiveDate.SelectedIndex = -1;
+                cbTotalCost.SelectedIndex = -1;
             }
             catch (Exception ex)
             {
